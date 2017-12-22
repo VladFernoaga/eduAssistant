@@ -10,7 +10,6 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,14 +28,12 @@ public class DbConfig {
   @Autowired
   private Properties prop;
 
-  @Primary
   @Bean
   public PlatformTransactionManager transactionManager() {
     EntityManagerFactory factory = entityManagerFactory().getObject();
     return new JpaTransactionManager(factory);
   }
 
-  @Primary
   @Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
     LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
@@ -60,13 +57,11 @@ public class DbConfig {
     return factory;
   }
 
-  @Primary
   @Bean
   public HibernateExceptionTranslator hibernateExceptionTranslator() {
     return new HibernateExceptionTranslator();
   }
 
-  @Primary
   @Bean
   public DataSource dataSource() {
     BasicDataSource dataSource = new BasicDataSource();

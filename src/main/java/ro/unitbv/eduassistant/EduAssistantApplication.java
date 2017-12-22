@@ -1,10 +1,10 @@
-package ro.unitbv.standalone;
+package ro.unitbv.eduassistant;
 
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {"ro.unitbv.eduassistant.config"})
+@SpringBootApplication
 public class EduAssistantApplication {
 
   public static void main(String[] args) {

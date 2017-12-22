@@ -1,7 +1,5 @@
 package ro.unitbv.eduassistant.service.impl;
 
-import java.util.Optional;
-
 import javax.transaction.Transactional;
 
 import org.apache.logging.log4j.LogManager;
@@ -31,15 +29,15 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	@Transactional
 	public StudentDto addNewOrGetExisting(String name) {
-		Optional<Student> student = studentRepo.findById(name);
-		if (student.isPresent()) {
-			return toStudentDto(student.get());
+		Student student = studentRepo.findByName(name);
+		if (student != null) {
+			return toStudentDto(student);
 		} else {
 			Student stud = new Student();
 			stud.setName(name);
 			try {
 				studentRepo.save(stud);
-				return toStudentDto(student.get());
+				return toStudentDto(stud);
 			} catch (DataIntegrityViolationException ex) {
 				throw new IllegalArgumentException(
 						String.format("The name %s allreay exist in this seesion please try with other name.", name));
