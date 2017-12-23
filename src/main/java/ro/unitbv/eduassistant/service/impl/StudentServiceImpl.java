@@ -1,5 +1,7 @@
 package ro.unitbv.eduassistant.service.impl;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.apache.logging.log4j.LogManager;
@@ -29,10 +31,12 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	@Transactional
 	public StudentDto addNewOrGetExisting(String name) {
-		Student student = studentRepo.findByName(name);
-		if (student != null) {
-			return toStudentDto(student);
+		Optional<Student> student = studentRepo.findByName(name);
+		if (student.isPresent()) {
+			LOGGER.info(() -> String.format("The student with name %s is allready present",name));
+			return toStudentDto(student.get());
 		} else {
+			LOGGER.info(() -> String.format("The student with name %s is not present",name));
 			Student stud = new Student();
 			stud.setName(name);
 			try {
