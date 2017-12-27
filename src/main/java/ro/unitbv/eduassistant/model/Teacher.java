@@ -10,14 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "student")
-public class Student {
+@Table(name = "teacher")
+public class Teacher {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +28,6 @@ public class Student {
 	@Column(name = "name",unique=true)
 	private String name;
 	
-	@OneToMany(mappedBy="student")
-	private List<Registation> registrations;
+	@OneToMany(mappedBy="teacher")
+	private List<Lesson> lessons;
 }

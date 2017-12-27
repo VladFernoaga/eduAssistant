@@ -6,5 +6,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan({"ro.unitbv.eduassistant"})
 public class BeanConfig {
-
+	
 }

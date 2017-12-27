@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,8 +17,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "student")
-public class Student {
+@Table(name = "registration")
+public class Registation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +28,12 @@ public class Student {
 	@Column(name = "name",unique=true)
 	private String name;
 	
-	@OneToMany(mappedBy="student")
-	private List<Registation> registrations;
+	@ManyToOne
+	private Student student;
+	
+	@ManyToOne
+	private LessonSession lessonSession;
+	
+	@OneToMany(mappedBy="registration")
+	private List<Response> responses;
 }
