@@ -25,9 +25,6 @@ public class Registation {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "name",unique=true)
-	private String name;
-	
 	@ManyToOne
 	private Student student;
 	
