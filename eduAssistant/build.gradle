@@ -1,0 +1,88 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.9.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+		mavenLocal()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+apply plugin: 'application'
+
+mainClassName = "ro.unitbv.eduassistant.EduAssistantApplication"
+
+group = 'ro.unitbv'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+ext.exludeDefaultLogger = 
+{  	 
+	exclude group: "commons-logging", module: "commons-logging"
+    exclude module: "spring-boot-starter-logging"
+}
+
+dependencies {
+
+	//SPRING
+	compile('org.springframework.boot:spring-boot-starter-web:1.5.9.RELEASE', exludeDefaultLogger)
+	
+	//JPA
+	compile ('org.springframework.boot:spring-boot-starter-data-jpa:1.5.9.RELEASE',exludeDefaultLogger)
+	
+	compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.12.Final'
+	compile ('org.hibernate:hibernate-entitymanager:5.2.12.Final')
+	compile ('org.hibernate:hibernate-java8:5.2.12.Final')
+	compile('org.eclipse.persistence:javax.persistence:2.1.0')
+	
+	//JTelegram
+	compile ('ro.unitbv:jtelegrambot-core:0.0.1-SNAPSHOT')
+	compile ('ro.unitbv:jtelegrambot-builders:0.0.1-SNAPSHOT')
+	
+	//Database
+	compile ('commons-dbcp:commons-dbcp:1.4')
+	compile ('org.postgresql:postgresql:42.1.4')
+      
+    //HIBERNATE TYPES    
+    compile ('com.vladmihalcea:hibernate-types-52:1.0.0')
+   
+    //JACKSON
+    compile ('com.fasterxml.jackson.core:jackson-core:2.9.1')
+    compile ('com.fasterxml.jackson.core:jackson-databind:2.9.1')
+    compile ('com.fasterxml.jackson.core:jackson-annotations:2.9.1')
+    compile ('com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.1')  
+        
+    //LOG4J
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.9.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.9.1'
+
+	//OTHERS
+	compile('org.projectlombok:lombok:1.16.18')
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    compile ('org.aspectj:aspectjweaver:1.8.11')	
+    compile "commons-io:commons-io:2.5"
+	
+	 //devtools
+    runtime('org.springframework.boot:spring-boot-devtools:1.5.9.RELEASE', exludeDefaultLogger)
+	
+	//Test    
+   	testCompile ('org.springframework.boot:spring-boot-starter-test:1.5.9.RELEASE', exludeDefaultLogger)
+   	
+   	//Mokito
+   	testCompile ('org.mockito:mockito-core:2.11.0')
+	testCompile ('junit:junit:4.12')
+}
+

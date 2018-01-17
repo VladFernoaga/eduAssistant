@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF">
+	<Properties>
+<!-- 		<Property name="PATTERN">%m%n</Property> -->
+		<Property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss,SSSSSS} \t%-5level \t[%t]    \t%c{1.}:%M (%L):\t  %m%n</Property> 
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+        
+         <RollingFile name="fileWriter"
+                     fileName="log.log"
+                     filePattern="$log.log.%d{yyyy-MM-dd-hh-mm}.gz">
+            <PatternLayout pattern="${PATTERN}"/>
+            <SizeBasedTriggeringPolicy size="5 MB"/>
+        </RollingFile>
+        
+    </Appenders>
+    <Loggers>
+	    
+        <Root level="DEBUG">
+        	<AppenderRef ref="Console"/>
+        	<AppenderRef ref="fileWriter"/>
+        </Root>
+    </Loggers>
+</Configuration>
