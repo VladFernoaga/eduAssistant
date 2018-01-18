@@ -3,13 +3,12 @@ package ro.unitbv.eduassistant.config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import io.fouad.jtb.core.JTelegramBot;
-import ro.unitbv.eduassistant.chatbot.handler.SimpleUpdateHandler;
+import ro.unitbv.eduassistant.chatbot.handler.GenericResponseHandler;
 
 @Configuration
 @ComponentScan({"ro.unitbv.eduassistant"})
@@ -22,17 +21,12 @@ public class BeanConfig {
 	private static final String BOOT_NAME = "easyShopper_bot";
 
 	@Autowired
-	private SimpleUpdateHandler updateHandler;
+	private GenericResponseHandler responseHandler;
 	
 	@Bean
-	public CommandLineRunner run() {
-		return (args) -> {
-			LOGGER.info("My chat boot is started!");
-			JTelegramBot bot = new JTelegramBot(BOOT_NAME, API_TOKEN, updateHandler);
-
-			LOGGER.info("Chatboot inistialized - start() will ocure");
-			bot.start();
-
-		};
+	public JTelegramBot getTelegramBot() {
+		LOGGER.info("Initilizate the chatbot with name: "+BOOT_NAME);
+		JTelegramBot bot = new JTelegramBot(BOOT_NAME, API_TOKEN, responseHandler);
+		return bot;
 	}
 }

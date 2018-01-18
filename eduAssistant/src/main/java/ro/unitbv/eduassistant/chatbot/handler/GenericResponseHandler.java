@@ -17,7 +17,7 @@ import io.fouad.jtb.core.enums.ParseMode;
 import io.fouad.jtb.core.exceptions.NegativeResponseException;
 
 @Service
-public class SimpleUpdateHandler implements UpdateHandler {
+public class GenericResponseHandler implements UpdateHandler {
 
 	/** The Constant LOGGER. */
 	public static final Logger LOGGER = LogManager.getLogger();
@@ -40,7 +40,7 @@ public class SimpleUpdateHandler implements UpdateHandler {
 
 	public void onMessageReceived(TelegramBotApi telegramBotApi, int id, Message message) {
 		try {
-			LOGGER.info(" The recived message: " + message.getText());
+			LOGGER.info(" The recived message: " + message.getText()+" chatId: "+message.getChat().getId());
 			String response = "Dummy respone from the bot";
 			ApiBuilder.api(telegramBotApi).sendMessage(response).toChatId(message.getChat().getId())
 					.asReplyToMessage(message.getMessageId()).asSilentMessage().parseMessageAs(ParseMode.MARKDOWN)
