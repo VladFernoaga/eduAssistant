@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,8 +18,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "registration")
-public class Registation {
+@Table(name = "registration",uniqueConstraints=@UniqueConstraint(columnNames={"lessonsession_id","student_id"}))
+public class Registration {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

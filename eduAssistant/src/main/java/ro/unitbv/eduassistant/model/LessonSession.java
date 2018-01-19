@@ -26,11 +26,11 @@ public class LessonSession {
 	private Long id;
 	
 	@Column(name = "session_key",unique=true)
-	private String sessionKey;
 	
+	private String sessionKey;
 	@ManyToOne
 	private Lesson lesson;
 	
 	@OneToMany(mappedBy="lessonSession")
-	private List<Registation> registations;
+	private List<Registration> registations;
 }

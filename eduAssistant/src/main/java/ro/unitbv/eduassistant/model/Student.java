@@ -28,5 +28,5 @@ public class Student {
 	private String name;
 	
 	@OneToMany(mappedBy="student")
-	private List<Registation> registrations;
+	private List<Registration> registrations;
 }

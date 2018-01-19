@@ -32,7 +32,7 @@ public class Response extends JsonbValue {
 	private Long id;
 
 	@ManyToOne
-	private Registation registration;
+	private Registration registration;
 	
 	@ManyToOne 
 	private Question question;
