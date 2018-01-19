@@ -24,7 +24,7 @@ public class TriggerQuestionController {
 
 	  @RequestMapping(value = "/question/{lessonSessionKey}/{questionId}",
 		      method = RequestMethod.POST)
-	public ResponseEntity<Void> getStudent(@PathVariable("lessonSessionKey") String lessonSessionKey, @PathVariable("questionId") String questionId){
+	public ResponseEntity<Void> triggerQuestion(@PathVariable("lessonSessionKey") String lessonSessionKey, @PathVariable("questionId") String questionId){
 		  try {
 			senderService.sendQuestionToRegisteredStudents(lessonSessionKey,questionId);
 		} catch (IOException e) {

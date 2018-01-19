@@ -1,0 +1,110 @@
+{
+	"id": "8e373c71-8428-ae52-11af-d830619c5e07",
+	"name": "eduAssistant",
+	"description": "",
+	"order": [
+		"0b07546d-1bb8-3870-91b1-e2dfc866e2db",
+		"cc283ae8-4947-2796-95ee-ff9633a20997",
+		"c8315bb1-9868-215d-5f43-460327ef057c"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1516363489284,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "0b07546d-1bb8-3870-91b1-e2dfc866e2db",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/teacher",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "8e373c71-8428-ae52-11af-d830619c5e07",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Create teacher",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1516363491079,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"name\" :\"Vlad Fernoaga Info\"\n}"
+		},
+		{
+			"id": "c8315bb1-9868-215d-5f43-460327ef057c",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/lesson",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "8e373c71-8428-ae52-11af-d830619c5e07",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Create Lesson",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1516363864802,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"name\" :\"Introductive lesson\",\n\t\"description\": \"This is just an example\",\n\t\"teacherId\": 1\n}"
+		},
+		{
+			"id": "cc283ae8-4947-2796-95ee-ff9633a20997",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/lesson/1/session",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "8e373c71-8428-ae52-11af-d830619c5e07",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Generate session",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1516363815194,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": ""
+		}
+	]
+}
