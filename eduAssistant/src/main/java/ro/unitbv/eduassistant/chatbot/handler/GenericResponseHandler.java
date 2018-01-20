@@ -22,11 +22,13 @@ import ro.unitbv.eduassistant.service.RegistrationService;
 @Service
 public class GenericResponseHandler implements UpdateHandler {
 
-	@Autowired
-	private RegistrationService registrationService;
 	/** The Constant LOGGER. */
 	public static final Logger LOGGER = LogManager.getLogger();
-
+	
+	@Autowired
+	private RegistrationService registrationService;
+	
+	
 	public void onCallbackQueryReceived(TelegramBotApi arg0, int arg1, CallbackQuery arg2) {
 	}
 
@@ -52,32 +54,27 @@ public class GenericResponseHandler implements UpdateHandler {
 		
 		switch (command) {
 		case "REG":
-			if(textWords.length <=1){
-				sendResponse(telegramBotApi,message.getChat().getId(), message.getMessageId(), "*Please provide a session key for registration*");
-				break;
-			}
-			String sessionKey = textWords[1]; 
-			String response = registrationService.registerNewStudentInSession(sessionKey, message.getChat().getId()+"");
-			sendResponse(telegramBotApi, message.getChat().getId(), message.getMessageId(), response);
+			processCommandRegister(telegramBotApi, message, textWords);
 			break;
 		default:
 			sendResponse(telegramBotApi, message.getChat().getId(), message.getMessageId(), "*Please provide a valid command. Call help to see what's avaialable*");
 			break;
 		}
 	
-//		
-//		try {
-//			LOGGER.info(" The recived message: " + message.getText()+" chatId: "+message.getChat().getId());
-//			String response = "Dummy respone from the bot";
-//			ApiBuilder.api(telegramBotApi).sendMessage(response).toChatId(message.getChat().getId())
-//					.asReplyToMessage(message.getMessageId()).asSilentMessage().parseMessageAs(ParseMode.MARKDOWN)
-//					.execute();
-//		} catch (NegativeResponseException | IOException e) {
-//			LOGGER.error("Error occured on Update Handler ", e);
-//		}
 
 	}
 	
+	private void processCommandRegister(TelegramBotApi telegramBotApi,  Message message, String textWords[]){
+		if (textWords.length <= 1) {
+			sendResponse(telegramBotApi, message.getChat().getId(), message.getMessageId(),
+					"*Please provide a session key for registration*");
+		} else {
+			String sessionKey = textWords[1];
+			String response = registrationService.registerNewStudentInSession(sessionKey,
+					message.getChat().getId() + "");
+			sendResponse(telegramBotApi, message.getChat().getId(), message.getMessageId(), response);
+		}
+	}
 	
 	private void sendResponse(TelegramBotApi telegramBotApi, long chatId, int messageId, String response){
 		try {
