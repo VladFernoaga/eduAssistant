@@ -15,9 +15,9 @@ public class TriggerQuestionController {
 	@Autowired
 	private QuestionSenderService senderService;
 
-	@RequestMapping(value = "/question/{lessonSessionKey}/{questionId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/question/{lessonSessionKey}/{questionId}", method = RequestMethod.GET)
 	public ResponseEntity<Void> triggerQuestion(@PathVariable("lessonSessionKey") String lessonSessionKey,
-			@PathVariable("questionId") String questionId) {
+			@PathVariable("questionId") long questionId) {
 		
 		senderService.sendQuestionToRegisteredStudents(lessonSessionKey, questionId);
 

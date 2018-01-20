@@ -71,15 +71,19 @@ public class CallbackQuery
 	@JsonProperty("data")
 	private String data;
 	
+	@JsonProperty("chat_instance")
+	private String chat_instance;
+	
 	public CallbackQuery(){}
 	
-	public CallbackQuery(String id, User from, Message message, String inline_message_id, String data)
+	public CallbackQuery(String id, User from, Message message, String inline_message_id, String data, String chat_instance)
 	{
 		this.id = id;
 		this.from = from;
 		this.message = message;
 		this.inline_message_id = inline_message_id;
 		this.data = data;
+		this.chat_instance =chat_instance;
 	}
 	
 	public String getId(){return id;}
@@ -87,7 +91,8 @@ public class CallbackQuery
 	public Message getMessage(){return message;}
 	public String getInline_message_id(){return inline_message_id;}
 	public String getData(){return data;}
-	
+	public String getChat_instance() {return chat_instance;}
+
 	@Override
 	public boolean equals(Object o)
 	{

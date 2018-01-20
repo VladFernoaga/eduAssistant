@@ -2,6 +2,7 @@ package ro.unitbv.eduassistant.service.impl;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 
@@ -9,11 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ro.unitbv.eduassistant.dto.LessonDto;
+import ro.unitbv.eduassistant.dto.QuestionDto;
 import ro.unitbv.eduassistant.model.Lesson;
 import ro.unitbv.eduassistant.model.LessonSession;
+import ro.unitbv.eduassistant.model.MultipleChoiceQuestion;
+import ro.unitbv.eduassistant.model.Question;
 import ro.unitbv.eduassistant.model.Teacher;
 import ro.unitbv.eduassistant.repo.LessonRepo;
 import ro.unitbv.eduassistant.repo.LessonSessionRepo;
+import ro.unitbv.eduassistant.repo.QuestionRepo;
 import ro.unitbv.eduassistant.repo.TeacherRepo;
 import ro.unitbv.eduassistant.service.LessonService;
 
@@ -26,6 +31,8 @@ public class LessonServiceImpl implements LessonService {
 	private LessonSessionRepo lessionSessionRepo;
 	@Autowired
 	private TeacherRepo teacherRepo;
+	@Autowired
+	private QuestionRepo questionRepo;
 
 	@Override
 	public void createLesson(LessonDto lessonDto) {
@@ -58,6 +65,29 @@ public class LessonServiceImpl implements LessonService {
 		}
 		throw new IllegalArgumentException(String
 				.format("The given lession with id: %s is not existing. The session cannot be created", lessonId));
+	}
+
+	@Override
+	public void addQuestion(QuestionDto questionDto, long lessonId) {
+		
+		Lesson lesson = lessonRepo.findById(lessonId).orElseThrow(() -> new IllegalArgumentException(String.format("The lesson id %s is invalid", lessonId)));
+		
+		Question question = new Question();
+		question.setLesson(lesson);
+		question.setQuestion(questionDto.getQuestion());
+		
+		MultipleChoiceQuestion mcQuest = new MultipleChoiceQuestion();
+		String correctVariant = questionDto.getVariants().get(questionDto.getCoorectVariant());
+		if(correctVariant == null){
+			new IllegalArgumentException(String.format("The given corect variant id:  %s cannot be fond in the answer list", questionDto.getCoorectVariant()));
+		}
+		mcQuest.setCorrectVriant(correctVariant);
+		mcQuest.setVariants(new ArrayList<>(questionDto.getVariants().values()));
+		
+		question.setMultipeChoiceQuestion(mcQuest);
+		
+		questionRepo.save(question);
+		
 	}
 
 }

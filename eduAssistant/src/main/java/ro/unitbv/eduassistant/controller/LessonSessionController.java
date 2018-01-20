@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ro.unitbv.eduassistant.dto.LessonDto;
 import ro.unitbv.eduassistant.dto.LessonSessionDto;
+import ro.unitbv.eduassistant.dto.QuestionDto;
 import ro.unitbv.eduassistant.service.LessonService;
 
 @RestController
@@ -30,4 +31,9 @@ public class LessonSessionController {
 		return ResponseEntity.ok().body(new LessonSessionDto(lessonSessionID));
 	}
 
+	@RequestMapping(value = "/lesson/{lessonId}/question", method = RequestMethod.POST)
+	public ResponseEntity<Void> addQuestion(@PathVariable("lessonId") long lessonId, @RequestBody QuestionDto question) {
+		lessonService.addQuestion(question, lessonId);
+		return ResponseEntity.ok().build();
+	}
 }
