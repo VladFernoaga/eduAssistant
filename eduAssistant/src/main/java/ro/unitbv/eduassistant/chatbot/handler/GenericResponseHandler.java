@@ -13,11 +13,11 @@ import io.fouad.jtb.core.UpdateHandler;
 import io.fouad.jtb.core.beans.CallbackQuery;
 import io.fouad.jtb.core.beans.ChosenInlineResult;
 import io.fouad.jtb.core.beans.InlineQuery;
-import io.fouad.jtb.core.beans.InlineQueryResultArticle;
 import io.fouad.jtb.core.beans.Message;
 import io.fouad.jtb.core.builders.ApiBuilder;
 import io.fouad.jtb.core.enums.ParseMode;
 import io.fouad.jtb.core.exceptions.NegativeResponseException;
+import ro.unitbv.eduassistant.service.QuestionService;
 import ro.unitbv.eduassistant.service.RegistrationService;
 
 @Service
@@ -28,22 +28,28 @@ public class GenericResponseHandler implements UpdateHandler {
 	
 	@Autowired
 	private RegistrationService registrationService;
-	
-	
+	@Autowired
+	private QuestionService questionService;
+
 	public void onCallbackQueryReceived(TelegramBotApi bot, int id, CallbackQuery callback) {
-		LOGGER.info("Response callback "+callback.getData()+ "  callbackId "+callback.getId()+ " mesageId "+ callback.getMessage().getMessageId()+"  chatId "+callback.getFrom().getId());
-		
-		
-		try {
-			ApiBuilder.api(bot).sendMessage("Cool answer").toChatId(callback.getFrom().getId()).asReplyToMessage(callback.getMessage().getMessageId()).asSilentMessage().execute();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NegativeResponseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		LOGGER.info("Response callback " + callback.getData() + "  callbackId " + callback.getId() + " mesageId "
+				+ callback.getMessage().getMessageId() + "  chatId " + callback.getFrom().getId());
+
+		boolean isCorrect = questionService.checkCorrectness(callback.getMessage().getText(), callback.getData(),callback.getFrom().getId());
+		String msg = null;
+		if (isCorrect) {
+			msg = "Correct response";
+		} else {
+			msg = "*Incorrect response*. Please try again.";
 		}
-		
+		try {
+			ApiBuilder.api(bot).sendMessage(msg).toChatId(callback.getFrom().getId())
+					.asReplyToMessage(callback.getMessage().getMessageId()).asSilentMessage()
+					.parseMessageAs(ParseMode.MARKDOWN).execute();
+		} catch (NegativeResponseException | IOException  e) {
+			LOGGER.error("Error occured when tryning to reply to a message ", e);
+			throw new IllegalStateException("Error occured when tryning to reply to a message", e);
+		}
 	}
 
 	public void onChosenInlineResultReceived(TelegramBotApi bot, int id, ChosenInlineResult inlineResult) {

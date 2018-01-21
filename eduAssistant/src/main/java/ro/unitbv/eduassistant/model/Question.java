@@ -34,7 +34,7 @@ public class Question extends JsonbValue {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "question", unique = true)
+	@Column(name = "question")
 	private String question;
 
 	@ManyToOne

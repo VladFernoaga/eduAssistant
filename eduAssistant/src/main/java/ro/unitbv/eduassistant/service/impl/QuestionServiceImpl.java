@@ -17,12 +17,18 @@ import io.fouad.jtb.core.builders.ReplyMarkupBuilder;
 import io.fouad.jtb.core.enums.ParseMode;
 import io.fouad.jtb.core.exceptions.NegativeResponseException;
 import ro.unitbv.eduassistant.model.LessonSession;
+import ro.unitbv.eduassistant.model.MultipleChoiceResponse;
 import ro.unitbv.eduassistant.model.Question;
+import ro.unitbv.eduassistant.model.Registration;
+import ro.unitbv.eduassistant.model.Response;
 import ro.unitbv.eduassistant.repo.LessonSessionRepo;
-import ro.unitbv.eduassistant.service.QuestionSenderService;
+import ro.unitbv.eduassistant.repo.QuestionRepo;
+import ro.unitbv.eduassistant.repo.RegistrationRepo;
+import ro.unitbv.eduassistant.repo.ResponseDao;
+import ro.unitbv.eduassistant.service.QuestionService;
 
 @Service 
-public class QuestionSenderServiceImpl implements QuestionSenderService{
+public class QuestionServiceImpl implements QuestionService{
 
 	/** The Constant LOGGER. */
 	public static final Logger LOGGER = LogManager.getLogger();
@@ -32,6 +38,15 @@ public class QuestionSenderServiceImpl implements QuestionSenderService{
 	
 	@Autowired 
 	private LessonSessionRepo lessonSessionRepo;
+	
+	@Autowired
+	private QuestionRepo questionRepo;
+	
+	@Autowired
+	private ResponseDao responseRepo;
+	
+	@Autowired
+	private RegistrationRepo registrationRepo;
 	
 	@Override
 	public void sendQuestionToRegisteredStudents(String lessonSessionKey,long questionId) {
@@ -45,7 +60,7 @@ public class QuestionSenderServiceImpl implements QuestionSenderService{
 		Question question = lessonSession.getLesson().getQuestions().stream().filter(q -> q.getId().equals(questionId)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.format("The questionId %s is invalid", questionId)));
 		
 		
-		registeredStudents.forEach(chatId -> sendQuestion("<code>What is the capital of Germany?</code>",generateRondomVariants(question.getMultipleChoiceQuestion().getVariants()), chatId));
+		registeredStudents.forEach(chatId -> sendQuestion("<code>"+question.getQuestion()+"</code>",generateRondomVariants(question.getMultipleChoiceQuestion().getVariants()), chatId));
 		
 		LOGGER.info("Finish sending the question to all students");
 	
@@ -71,5 +86,25 @@ public class QuestionSenderServiceImpl implements QuestionSenderService{
 			throw new IllegalStateException("Error occured when tryning to reply to a message",e);
 		}
 	
+	}
+
+	@Override
+	public boolean checkCorrectness(String questionString, String selectedRsp, long chatId) {
+		Question question = questionRepo.findByQuestion(questionString).orElseThrow(() -> new IllegalArgumentException(
+				String.format("The question string: %s is invalid", questionString)));
+		boolean isCorrect = question.getMultipleChoiceQuestion().getCorrectVriant().equals(selectedRsp);
+
+		Registration registration = registrationRepo.getOrderedRegistrations(chatId+"")
+				.orElseThrow(() -> new IllegalArgumentException(String.format("The student string: %s id", chatId)))
+				.get(0);
+
+		Response response = new Response();
+		response.setQuestion(question);
+		response.setRegistration(registration);
+		response.setMultipeChoiceQuestion(new MultipleChoiceResponse(selectedRsp,isCorrect));
+		
+		responseRepo.save(response);
+		
+		return isCorrect;
 	}
 }

@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ro.unitbv.eduassistant.service.QuestionSenderService;
+import ro.unitbv.eduassistant.service.QuestionService;
 
 @RestController
 public class TriggerQuestionController {
 
 	@Autowired
-	private QuestionSenderService senderService;
+	private QuestionService senderService;
 
 	@RequestMapping(value = "/question/{lessonSessionKey}/{questionId}", method = RequestMethod.GET)
 	public ResponseEntity<Void> triggerQuestion(@PathVariable("lessonSessionKey") String lessonSessionKey,
