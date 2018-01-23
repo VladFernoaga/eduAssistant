@@ -10,6 +10,6 @@ public interface StudentRepo extends JpaRepository<Student, Long>{
 
 	Optional<Student> findById(Long name);
 	
-	Optional<Student>	findByName(String name);
+	Optional<Student>	findByChatbotId(Long chatbotId);
 
 }

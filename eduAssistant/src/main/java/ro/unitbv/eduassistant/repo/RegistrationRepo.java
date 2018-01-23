@@ -13,7 +13,7 @@ public interface RegistrationRepo extends JpaRepository<Registration, Long>{
 	
 	Optional<Registration> findById(Long id);
 	
-	@Query("Select r from Registration r where r.student.name = :chatId order by r.id")
-	Optional<List<Registration>> getOrderedRegistrations(@Param("chatId") String chatId);
+	@Query("Select r from Registration r where r.student.chatbotId = :chatId order by r.id")
+	Optional<List<Registration>> getOrderedRegistrations(@Param("chatId") Long chatId);
 
 }

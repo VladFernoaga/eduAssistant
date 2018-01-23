@@ -27,17 +27,18 @@ public class RegistrationServiceImpl implements RegistrationService {
 	private LessonSessionRepo lessonSessionRepo;
 	
 	@Override
-	public String registerNewStudentInSession(String sessionKey, String userName) {
+	public String registerNewStudentInSession(String sessionKey, String name, Long chatbotId) {
 		
 		Optional<LessonSession> lessSes = lessonSessionRepo.findBySessionKey(sessionKey);
 		if(!lessSes.isPresent()){
 			return "*Unvalid sessionKey*";
 		}
 		
-		Optional<Student> student = studRepo.findByName(userName);
+		Optional<Student> student = studRepo.findByChatbotId(chatbotId);
 		if( !student.isPresent()){
 			Student newStud = new Student();
-			newStud.setName(userName);
+			newStud.setChatbotId(chatbotId);
+			newStud.setName(name);
 			studRepo.save(newStud);
 			student = Optional.of(newStud);
 		}

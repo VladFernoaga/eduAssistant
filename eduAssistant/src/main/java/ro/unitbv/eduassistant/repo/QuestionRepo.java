@@ -8,5 +8,5 @@ import ro.unitbv.eduassistant.model.Question;
 
 public interface QuestionRepo extends JpaRepository<Question, Long>{
 
-	Optional<Question> findByQuestion(String question);
+	Optional<Question> findById(Long id);
 }

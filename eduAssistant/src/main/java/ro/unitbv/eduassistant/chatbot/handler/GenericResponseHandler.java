@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+
 import io.fouad.jtb.core.TelegramBotApi;
 import io.fouad.jtb.core.UpdateHandler;
 import io.fouad.jtb.core.beans.CallbackQuery;
@@ -19,12 +21,15 @@ import io.fouad.jtb.core.enums.ParseMode;
 import io.fouad.jtb.core.exceptions.NegativeResponseException;
 import ro.unitbv.eduassistant.service.QuestionService;
 import ro.unitbv.eduassistant.service.RegistrationService;
+import ro.unitbv.eduassistant.service.impl.CallbackData;
 
 @Service
 public class GenericResponseHandler implements UpdateHandler {
 
 	/** The Constant LOGGER. */
 	public static final Logger LOGGER = LogManager.getLogger();
+	
+	private Gson gson  = new Gson();
 	
 	@Autowired
 	private RegistrationService registrationService;
@@ -34,8 +39,9 @@ public class GenericResponseHandler implements UpdateHandler {
 	public void onCallbackQueryReceived(TelegramBotApi bot, int id, CallbackQuery callback) {
 		LOGGER.info("Response callback " + callback.getData() + "  callbackId " + callback.getId() + " mesageId "
 				+ callback.getMessage().getMessageId() + "  chatId " + callback.getFrom().getId());
-
-		boolean isCorrect = questionService.checkCorrectness(callback.getMessage().getText(), callback.getData(),callback.getFrom().getId());
+		CallbackData callBackData = gson.fromJson(callback.getData(),CallbackData.class);
+		
+		boolean isCorrect = questionService.checkCorrectness(callBackData.getId(), callBackData.getValue(),callback.getFrom().getId());
 		String msg = null;
 		if (isCorrect) {
 			msg = "Correct response";
@@ -89,8 +95,16 @@ public class GenericResponseHandler implements UpdateHandler {
 					"*Please provide a session key for registration*");
 		} else {
 			String sessionKey = textWords[1];
-			String response = registrationService.registerNewStudentInSession(sessionKey,
-					message.getChat().getId() + "");
+			String name ="";
+			if(message.getFrom().getFirstName() != null){
+				name = message.getFrom().getFirstName() + ", ";
+			}
+			if( message.getFrom().getLastName() != null){
+					name = message.getFrom().getLastName();
+			}
+			
+			String response = registrationService.registerNewStudentInSession(sessionKey, name,
+					message.getChat().getId());
 			sendResponse(telegramBotApi, message.getChat().getId(), message.getMessageId(), response);
 		}
 	}

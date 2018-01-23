@@ -24,8 +24,11 @@ public class Student {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "name",unique=true)
+	@Column(name = "name",unique=false)
 	private String name;
+	
+	@Column(name = "chatbotId",unique=true)
+	private Long chatbotId;
 	
 	@OneToMany(mappedBy="student")
 	private List<Registration> registrations;

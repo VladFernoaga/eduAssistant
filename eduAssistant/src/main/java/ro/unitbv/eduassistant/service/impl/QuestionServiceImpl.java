@@ -10,6 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+
 import io.fouad.jtb.core.JTelegramBot;
 import io.fouad.jtb.core.beans.InlineKeyboardButton;
 import io.fouad.jtb.core.builders.ApiBuilder;
@@ -33,6 +35,8 @@ public class QuestionServiceImpl implements QuestionService{
 	/** The Constant LOGGER. */
 	public static final Logger LOGGER = LogManager.getLogger();
 	
+	private Gson gson = new Gson();
+	
 	@Autowired
 	private JTelegramBot bot;
 	
@@ -55,22 +59,23 @@ public class QuestionServiceImpl implements QuestionService{
 		LessonSession lessonSession = lessonSessionRepo.findBySessionKey(lessonSessionKey).orElseThrow(
 				() -> new IllegalArgumentException(String.format("The sessionKey %s is invalid", lessonSessionKey)));
 
-		List<Long> registeredStudents = lessonSession.getRegistations().stream().map(reg -> Long.parseLong(reg.getStudent().getName())).collect(Collectors.toList());
+		List<Long> registeredStudents = lessonSession.getRegistations().stream().map(reg -> reg.getStudent().getChatbotId()).collect(Collectors.toList());
 		
 		Question question = lessonSession.getLesson().getQuestions().stream().filter(q -> q.getId().equals(questionId)).findFirst().orElseThrow(() -> new IllegalArgumentException(String.format("The questionId %s is invalid", questionId)));
 		
 		
-		registeredStudents.forEach(chatId -> sendQuestion("<code>"+question.getQuestion()+"</code>",generateRondomVariants(question.getMultipleChoiceQuestion().getVariants()), chatId));
+		registeredStudents.forEach(chatId -> sendQuestion("<code>"+question.getQuestion()+"</code>",generateRondomVariants(question.getMultipleChoiceQuestion().getVariants(),question.getId()), chatId));
 		
 		LOGGER.info("Finish sending the question to all students");
 	
 	}
 	
-	private InlineKeyboardButton[][] generateRondomVariants(List<String> variants){
+	private InlineKeyboardButton[][] generateRondomVariants(List<String> variants, Long questId){
 		InlineKeyboardButton[][] buttons = new InlineKeyboardButton[variants.size()][1];
 		Collections.shuffle(variants);
 		for(int id=0; id< variants.size(); id++){
-			buttons[id][0] = new InlineKeyboardButton(String.format("%d. %s",id+1,variants.get(id)), null, variants.get(id), null);
+			CallbackData callbackData = new CallbackData(variants.get(id), questId);
+			buttons[id][0] = new InlineKeyboardButton(String.format("%d. %s",id+1,variants.get(id)), null, gson.toJson(callbackData), null);
 		}
 		return buttons;
 	}
@@ -89,12 +94,12 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 
 	@Override
-	public boolean checkCorrectness(String questionString, String selectedRsp, long chatId) {
-		Question question = questionRepo.findByQuestion(questionString).orElseThrow(() -> new IllegalArgumentException(
-				String.format("The question string: %s is invalid", questionString)));
+	public boolean checkCorrectness(Long questId, String selectedRsp, long chatId) {
+		Question question = questionRepo.findById(questId).orElseThrow(() -> new IllegalArgumentException(
+				String.format("The question id: %s is invalid", questId)));
 		boolean isCorrect = question.getMultipleChoiceQuestion().getCorrectVriant().equals(selectedRsp);
 
-		Registration registration = registrationRepo.getOrderedRegistrations(chatId+"")
+		Registration registration = registrationRepo.getOrderedRegistrations(chatId)
 				.orElseThrow(() -> new IllegalArgumentException(String.format("The student string: %s id", chatId)))
 				.get(0);
 
