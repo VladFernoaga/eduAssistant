@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ro.unitbv.eduassistant.dto.AllLessonQuestionDto;
+import ro.unitbv.eduassistant.dto.QuestionStatsDto;
 import ro.unitbv.eduassistant.model.Lesson;
 import ro.unitbv.eduassistant.model.Question;
 import ro.unitbv.eduassistant.repo.LessonRepo;
@@ -51,6 +52,12 @@ public class ReportServiceImpl implements ReportService {
 		}
 		
 		return report;
+	}
+
+	@Override
+	public QuestionStatsDto getQuestionStats(Long lessonId, Long questionId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
