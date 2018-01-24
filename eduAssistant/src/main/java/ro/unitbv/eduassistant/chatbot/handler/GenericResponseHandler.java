@@ -41,17 +41,17 @@ public class GenericResponseHandler implements UpdateHandler {
 				+ callback.getMessage().getMessageId() + "  chatId " + callback.getFrom().getId());
 		CallbackData callBackData = gson.fromJson(callback.getData(),CallbackData.class);
 		
-		boolean isCorrect = questionService.checkCorrectness(callBackData.getId(), callBackData.getValue(),callback.getFrom().getId());
+		String hint = questionService.checkCorrectness(callBackData.getId(), callBackData.getValue(),callback.getFrom().getId());
 		String msg = null;
-		if (isCorrect) {
-			msg = "Correct response";
+		if (hint == null) {
+			msg = "<b>Your response is correct</b>";
 		} else {
-			msg = "*Incorrect response*. Please try again.";
+			msg = String.format("<b>Your response is incorrect</b>. Here is a hint: <i>%s</i>",hint);
 		}
 		try {
 			ApiBuilder.api(bot).sendMessage(msg).toChatId(callback.getFrom().getId())
 					.asReplyToMessage(callback.getMessage().getMessageId()).asSilentMessage()
-					.parseMessageAs(ParseMode.MARKDOWN).execute();
+					.parseMessageAs(ParseMode.HTML).execute();
 		} catch (NegativeResponseException | IOException  e) {
 			LOGGER.error("Error occured when tryning to reply to a message ", e);
 			throw new IllegalStateException("Error occured when tryning to reply to a message", e);

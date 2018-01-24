@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class MultipleChoiceQuestion {
 	
-	private List<String> variants;
+	private List<VariantValue> variants;
 	private String correctVriant;
 }

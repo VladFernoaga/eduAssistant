@@ -11,7 +11,7 @@ public class QuestionDto {
 
 	private String question;
 	
-	private Map<Integer,String> variants;
+	private Map<Integer,VariantValueDto> variants;
 	
-	private int coorectVariant;
+	private int correctVariant;
 }
