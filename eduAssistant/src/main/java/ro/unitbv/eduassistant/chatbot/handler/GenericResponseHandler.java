@@ -46,7 +46,7 @@ public class GenericResponseHandler implements UpdateHandler {
 		if (hint == null) {
 			msg = "<b>Your response is correct</b>";
 		} else {
-			msg = String.format("<b>Your response is incorrect</b>. Here is a hint: <i>%s</i>",hint);
+			msg = String.format("<b>Your response is incorrect</b>. Here is a hint: <i>%s</i>    <b>Please try again!</b>",hint);
 		}
 		try {
 			ApiBuilder.api(bot).sendMessage(msg).toChatId(callback.getFrom().getId())

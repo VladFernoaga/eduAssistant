@@ -17,8 +17,8 @@ public class BeanConfig {
 	/** The Constant LOGGER. */
 	public static final Logger LOGGER = LogManager.getLogger();
 
-	private static final String API_TOKEN = "363877872:AAEGG9_770o2V7y_yVZfy2_zZjpweUp4J8Y";
-	private static final String BOOT_NAME = "easyShopper_bot";
+	private static final String API_TOKEN = "482992037:AAFx4yC92gN5u8HOZfYYKOCjn6RBjlONngI";
+	private static final String BOOT_NAME = "edu_assistant_bot";
 
 	@Autowired
 	private GenericResponseHandler responseHandler;
