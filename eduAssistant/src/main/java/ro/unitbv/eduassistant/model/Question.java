@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import ro.unitbv.eduassistant.util.ParserUtil;
@@ -24,6 +25,7 @@ import ro.unitbv.eduassistant.util.ParserUtil;
 @Setter
 @Entity
 @Table(name = "question")
+@EqualsAndHashCode(callSuper=false, of="id")
 public class Question extends JsonbValue {
 
 	/** The Constant LOGGER. */
@@ -55,4 +57,6 @@ public class Question extends JsonbValue {
 	public MultipleChoiceQuestion getMultipleChoiceQuestion() {
 		return ParserUtil.getGson().fromJson(this.jsonbColum.toJSONString(), MultipleChoiceQuestion.class);
 	}
+	
+	
 }

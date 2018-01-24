@@ -1,4 +1,4 @@
-package ro.unitbv.eduassistant.dto;
+package ro.unitbv.eduassistant.dto.report;
 
 import lombok.Getter;
 import lombok.Setter;

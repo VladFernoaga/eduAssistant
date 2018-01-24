@@ -1,11 +1,14 @@
 package ro.unitbv.eduassistant.service;
 
-import ro.unitbv.eduassistant.dto.AllLessonQuestionDto;
-import ro.unitbv.eduassistant.dto.QuestionStatsDto;
+import ro.unitbv.eduassistant.dto.report.AllLessonQuestionDto;
+import ro.unitbv.eduassistant.dto.report.LessonOverviewDto;
+import ro.unitbv.eduassistant.dto.report.QuestionStatsDto;
 
 public interface ReportService {
 
 	AllLessonQuestionDto getAllLessionQuestionReport(Long lessonId);
 	
-	QuestionStatsDto getQuestionStats(Long lessonId, Long questionId);
+	QuestionStatsDto getQuestionStats(Long questionId);
+
+	LessonOverviewDto getLessonOverview(long l);
 }
