@@ -49,7 +49,7 @@
 			"description": "",
 			"collectionId": "99c83602-101c-9ea7-fa41-42a3bb5dbba6",
 			"responses": [],
-			"rawModeData": "{\n\t\"question\" : \"What is the capital of Belgium?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"Venice\", \"hint\": \"It is true, this country is from Europe. But is more to the north than Venice.\"},\n\t  \"2\": { \"value\": \"Beijing\", \"hint\": \"You better should think first about the continent.\"},\n\t  \"3\": { \"value\": \"Brusells\", \"hint\": null},\n\t  \"4\": { \"value\": \"London\", \"hint\": \"You are close, these cities are neighbors but the capital of Belgium is on mainland.\"}\n\t},\n\t\"correctVariant\": 3\n\n\t\n}"
+			"rawModeData": "{\n\t\"question\" : \"Which is the capital of Belgium?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"Venice\", \"hint\": \"It is true, this city is Europe. But is more to the North than Venice.\"},\n\t  \"2\": { \"value\": \"Beijing\", \"hint\": \"You should better think about the continent.\"},\n\t  \"3\": { \"value\": \"Brussels\", \"hint\": null},\n\t  \"4\": { \"value\": \"London\", \"hint\": \"You are close, these cities are neighbors but the capital of Belgium is on the mainland.\"}\n\t},\n\t\"correctVariant\": 3\n\n\t\n}"
 		},
 		{
 			"id": "0f937b64-3a9f-7d55-493e-45cf48286542",
@@ -108,7 +108,7 @@
 			"description": "",
 			"collectionId": "99c83602-101c-9ea7-fa41-42a3bb5dbba6",
 			"responses": [],
-			"rawModeData": "{\n\t\"question\" : \"When did the first world war started?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"2011\", \"hint\": \"It was in the past century.\"},\n\t  \"2\": { \"value\": \"1847\", \"hint\": \"You were not so much time in the past.\"},\n\t  \"3\": { \"value\": \"1914\", \"hint\": null},\n\t  \"4\": { \"value\": \"1935\", \"hint\": \"It was the first not the second World War.\"}\n\t},\n\t\"correctVariant\": 3\n}"
+			"rawModeData": "{\n\t\"question\" : \"When did the first world war started?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"2011\", \"hint\": \"It was in the past century.\"},\n\t  \"2\": { \"value\": \"1847\", \"hint\": \”Not so much time in the past.\"},\n\t  \"3\": { \"value\": \"1914\", \"hint\": null},\n\t  \"4\": { \"value\": \"1935\", \"hint\": \”The question is about the first not the second World War.\"}\n\t},\n\t\"correctVariant\": 3\n}"
 		},
 		{
 			"id": "33adf030-dfe2-cde6-1a2d-a121a4bb1c5b",
@@ -212,7 +212,7 @@
 			"description": "",
 			"collectionId": "99c83602-101c-9ea7-fa41-42a3bb5dbba6",
 			"responses": [],
-			"rawModeData": "{\n\t\"question\" : \"What is the first city that reached over 5 million people first?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"London\", \"hint\": null},\n\t  \"2\": { \"value\": \"New York\", \"hint\": \"Is true, New York is a big city, but you should think about the capital of the country from where it comes the language of US.\"},\n\t  \"3\": { \"value\": \"Beijing\", \"hint\": \"It is not an Asian country, your should look more in the west.\"},\n\t  \"4\": { \"value\": \"Mexico City\", \"hint\": \"It is not an American country, look on the other side of the ocean.\"}\n\t},\n\t\"correctVariant\": 1\n}"
+			"rawModeData": "{\n\t\"question\" : \"Which is the first city that reached over 5 million people?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"London\", \"hint\": null},\n\t  \"2\": { \"value\": \"New York\", \"hint\": \"It’s true, New York is a big city, but you should think about the capital of an European country.\”},\n\t  \"3\": { \"value\": \"Beijing\", \"hint\": \"It’s  not an Asian country, your should look more to the West.\"},\n\t  \"4\": { \"value\": \"Mexico City\", \"hint\": \"It’s not an American country, look on the other side of the ocean.\"}\n\t},\n\t\"correctVariant\": 1\n}"
 		},
 		{
 			"id": "82a68e7d-56c5-8348-ebe2-7fe16ce9cc9c",
@@ -264,7 +264,7 @@
 			"description": "",
 			"collectionId": "99c83602-101c-9ea7-fa41-42a3bb5dbba6",
 			"responses": [],
-			"rawModeData": "{\n\t\"question\" : \"Who where the founders of Intel company?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"Gordon Moore and Robert Noyce\", \"hint\": null},\n\t  \"2\": { \"value\": \"Bill Gates\", \"hint\": \"It is a hardware company. Bill Gates is the software guy.\"},\n\t  \"3\": { \"value\": \"Larry Page and Sergey Brin\", \"hint\": \"Intel is older than Larry and Sergey, the Google founders.\"},\n\t  \"4\": { \"value\": \"Wolfgang Porsche\" , \"hint\": \"It's a microprocessor company not a car company.\"}\n\t},\n\t\"correctVariant\": 1\n}"
+			"rawModeData": "{\n\t\"question\" : \"Who where the founders of Intel company?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"Gordon Moore and Robert Noyce\", \"hint\": null},\n\t  \"2\": { \"value\": \"Bill Gates\", \"hint\": \"It’s a hardware company. Bill Gates is the software guy.\"},\n\t  \"3\": { \"value\": \"Larry Page and Sergey Brin\", \"hint\": \"Intel is older than Larry and Sergey, the Google founders.\"},\n\t  \"4\": { \"value\": \"Wolfgang Porsche\" , \"hint\": \"It's a microprocessor company, not a car company.\"}\n\t},\n\t\"correctVariant\": 1\n}"
 		},
 		{
 			"id": "a60a10e4-28bc-8f4f-1492-28a43a78a0dd",
@@ -317,7 +317,7 @@
 			"collectionId": "99c83602-101c-9ea7-fa41-42a3bb5dbba6",
 			"responses": [],
 			"collection_id": "99c83602-101c-9ea7-fa41-42a3bb5dbba6",
-			"rawModeData": "{\n\t\"question\" : \"Where was Napoleon Bonaparte born?\",\n\t\t\"variants\":{\n\t  \"1\": {\"value\": \"Brittany\", \"hint\": \"Think of a place that is not on the mainland.\"},\n\t  \"2\": { \"value\": \"Corsica\", \"hint\": null},\n\t  \"3\": { \"value\": \"Catalunia\", \"hint\": \"Come on, Napoleon was French!\"},\n\t  \"4\": { \"value\": \"Occitanie\", \"hint\": \"Think of a place that is not on the mainland.\"}\n\t},\n\t\"correctVariant\": 2\n}"
+			"rawModeData": "{\n\t\"question\" : \"Where was Napoleon Bonaparte born?\",\n\t\t\"variants\":{\n\t  \"1\": {\"value\": \"Brittany\", \"hint\": \"Think of a place that is not on the mainland.\"},\n\t  \"2\": { \"value\": \"Corsica\", \"hint\": null},\n\t  \"3\": { \"value\": \"Catalunya\", \"hint\": \"Come on, Napoleon was French!\"},\n\t  \"4\": { \"value\": \"Occitanie\", \"hint\": \"Think of a place that is not on the mainland.\"}\n\t},\n\t\"correctVariant\": 2\n}"
 		},
 		{
 			"id": "bbb6782f-f498-0b0e-acab-6d865f2f8313",
