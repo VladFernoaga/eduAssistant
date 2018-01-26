@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ro.unitbv.eduassistant.dto.report.AllLessonQuestionDto;
 import ro.unitbv.eduassistant.dto.report.LessonOverviewDto;
+import ro.unitbv.eduassistant.dto.report.QuestionInfoDto;
 import ro.unitbv.eduassistant.dto.report.QuestionStatsDto;
 import ro.unitbv.eduassistant.service.ReportService;
 
@@ -26,6 +27,11 @@ public class ReportController {
 	@RequestMapping(value = "/report/question/{id}", method = RequestMethod.GET)
 	public ResponseEntity<QuestionStatsDto> questionStats(@PathVariable("id") Long questionId) {
 		return ResponseEntity.ok().body(reportService.getQuestionStats(questionId));
+	}
+	
+	@RequestMapping(value = "/report/question/{id}/info", method = RequestMethod.GET)
+	public ResponseEntity<QuestionInfoDto> questionStatsInfo(@PathVariable("id") Long questionId) {
+		return ResponseEntity.ok().body(reportService.getQuestionInfo(questionId));
 	}
 	
 	@RequestMapping(value = "/report/overview", method = RequestMethod.GET)

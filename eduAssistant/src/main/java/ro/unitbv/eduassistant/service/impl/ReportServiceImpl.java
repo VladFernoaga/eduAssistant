@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import ro.unitbv.eduassistant.dto.report.AllLessonQuestionDto;
 import ro.unitbv.eduassistant.dto.report.LessonOverviewDto;
+import ro.unitbv.eduassistant.dto.report.QuestionInfoDto;
 import ro.unitbv.eduassistant.dto.report.QuestionStatsDto;
 import ro.unitbv.eduassistant.dto.report.StudentLessonOverviewDto;
 import ro.unitbv.eduassistant.dto.report.StudentQuestionStatDto;
@@ -108,6 +109,44 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
+	public QuestionInfoDto getQuestionInfo(Long questionId) {
+		Question question = questRepo.findById(questionId)
+				.orElseThrow(() -> new IllegalArgumentException(String.format("Unknown questionId: %s", questionId)));
+
+		int expectedAmountOfAnswers = 0;
+		int correctAmountOfAnswers = 0;
+		int wrongAmountOfAnswers = 0;
+		int pendingAmountOfAnswers = 0;
+		List<Student> students = studRepo.findAll();
+		for (Student stud : students) {
+			List<Registration> registrations = stud.getRegistrations();
+			if (registrations != null && !registrations.isEmpty()) {
+				expectedAmountOfAnswers++;
+				
+				List<Response> questionResponses = registrations.get(0).getResponses().stream()
+						.filter(r -> r.getQuestion().getId().equals(questionId)).collect(Collectors.toList());
+				Response finalResponse = null;
+
+				questionResponses.sort((q1, q2) -> (int) (q1.getId() - q2.getId()));
+				if (!questionResponses.isEmpty()) {
+					finalResponse = questionResponses.get(questionResponses.size() - 1);
+				}
+
+				if (finalResponse != null) {
+					if(finalResponse.getMultipleChoiceQuestion().isCorrect()) {
+						correctAmountOfAnswers++;
+					}else {
+						wrongAmountOfAnswers++;
+					}
+				} else {
+					pendingAmountOfAnswers++;
+				}
+			}
+		}
+		return new QuestionInfoDto(question.getQuestion(),expectedAmountOfAnswers,correctAmountOfAnswers,wrongAmountOfAnswers,pendingAmountOfAnswers);
+	}
+
+	@Override
 	public LessonOverviewDto getLessonOverview(long lessonId) {
 
 		List<StudentLessonOverviewDto> data = new ArrayList<>();
@@ -175,7 +214,7 @@ public class ReportServiceImpl implements ReportService {
 
 				if (totalNrRespondedQuestions == 5) {
 					double precent = ((double) correctQuestions) / 5;
-					
+
 					studOverviewStat.setProcent(NumberFormat.getPercentInstance().format(precent));
 				} else {
 					studOverviewStat.setProcent("");
@@ -187,5 +226,4 @@ public class ReportServiceImpl implements ReportService {
 
 		return new LessonOverviewDto(data);
 	}
-
 }
