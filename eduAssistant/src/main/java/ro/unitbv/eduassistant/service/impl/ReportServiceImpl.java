@@ -3,8 +3,10 @@ package ro.unitbv.eduassistant.service.impl;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +49,13 @@ public class ReportServiceImpl implements ReportService {
 
 		for (Question quest : lesson.getQuestions()) {
 			int id = Integer.valueOf(quest.getId() + "");
-			int nrOfCorrectAnswers = (int) quest.getResponses().stream()
-					.filter(rsp -> rsp.getMultipleChoiceQuestion().isCorrect()).count();
+
+			List<Response> responses = quest.getResponses().stream()
+					.filter(rsp -> rsp.getMultipleChoiceQuestion().isCorrect()).collect(Collectors.toList());
+			Set<Long> registrationIdWithCorrectAnswers = new HashSet<>();
+			responses.forEach(rsp -> registrationIdWithCorrectAnswers.add(rsp.getRegistration().getId()));
+			
+			int nrOfCorrectAnswers = registrationIdWithCorrectAnswers.size();
 			switch (id) {
 			case 1:
 				report.setQuestion1(nrOfCorrectAnswers);
