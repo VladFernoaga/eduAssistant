@@ -24,7 +24,7 @@ import ro.unitbv.eduassistant.service.RegistrationService;
 import ro.unitbv.eduassistant.service.impl.CallbackData;
 
 @Service
-public class GenericResponseHandler implements UpdateHandler {
+public class EduAssistantUpdateHandler implements UpdateHandler {
 
 	/** The Constant LOGGER. */
 	public static final Logger LOGGER = LogManager.getLogger();

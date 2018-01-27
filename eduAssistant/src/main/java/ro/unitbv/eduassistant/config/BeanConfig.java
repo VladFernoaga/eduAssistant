@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import io.fouad.jtb.core.JTelegramBot;
-import ro.unitbv.eduassistant.chatbot.handler.GenericResponseHandler;
+import ro.unitbv.eduassistant.chatbot.handler.EduAssistantUpdateHandler;
 
 @Configuration
 @ComponentScan({"ro.unitbv.eduassistant"})
@@ -21,12 +21,12 @@ public class BeanConfig {
 	private static final String BOOT_NAME = "edu_assistant_bot";
 
 	@Autowired
-	private GenericResponseHandler responseHandler;
+	private EduAssistantUpdateHandler updateHandler;
 	
 	@Bean
 	public JTelegramBot getTelegramBot() {
 		LOGGER.info("Initilizate the chatbot with name: "+BOOT_NAME);
-		JTelegramBot bot = new JTelegramBot(BOOT_NAME, API_TOKEN, responseHandler);
+		JTelegramBot bot = new JTelegramBot(BOOT_NAME, API_TOKEN, updateHandler);
 		return bot;
 	}
 }
