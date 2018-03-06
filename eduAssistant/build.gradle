@@ -48,8 +48,7 @@ dependencies {
 	compile('org.eclipse.persistence:javax.persistence:2.1.0')
 	
 	//JTelegram
-	compile ('ro.unitbv:jtelegrambot-core:0.0.1-SNAPSHOT')
-	compile ('ro.unitbv:jtelegrambot-builders:0.0.1-SNAPSHOT')
+	compile 'com.github.pengrad:java-telegram-bot-api:3.6.0'
 	
 	//Database
 	compile ('commons-dbcp:commons-dbcp:1.4')

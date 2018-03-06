@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import io.fouad.jtb.core.JTelegramBot;
+import com.pengrad.telegrambot.TelegramBot;
+
 import ro.unitbv.eduassistant.chatbot.handler.SimpleUpdateHandler;
 
 @Configuration
@@ -27,12 +28,13 @@ public class BeanConfig {
 	@Bean
 	public CommandLineRunner run() {
 		return (args) -> {
-			LOGGER.info("My chat boot is started!");
-			JTelegramBot bot = new JTelegramBot(BOOT_NAME, API_TOKEN, updateHandler);
 
-			LOGGER.info("Chatboot inistialized - start() will ocure");
-			bot.start();
-
+			getTelegramBot().setUpdatesListener(updateHandler);
 		};
+	}
+	
+	@Bean
+	public TelegramBot getTelegramBot() {
+		return  new TelegramBot(API_TOKEN);
 	}
 }

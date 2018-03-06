@@ -1,54 +1,44 @@
 package ro.unitbv.eduassistant.chatbot.handler;
 
-import java.io.IOException;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.fouad.jtb.core.TelegramBotApi;
-import io.fouad.jtb.core.UpdateHandler;
-import io.fouad.jtb.core.beans.CallbackQuery;
-import io.fouad.jtb.core.beans.ChosenInlineResult;
-import io.fouad.jtb.core.beans.InlineQuery;
-import io.fouad.jtb.core.beans.Message;
-import io.fouad.jtb.core.builders.ApiBuilder;
-import io.fouad.jtb.core.enums.ParseMode;
-import io.fouad.jtb.core.exceptions.NegativeResponseException;
+import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.UpdatesListener;
+import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.model.request.ForceReply;
+import com.pengrad.telegrambot.model.request.ParseMode;
+import com.pengrad.telegrambot.request.SendMessage;
+import com.pengrad.telegrambot.response.SendResponse;
 
 @Service
-public class SimpleUpdateHandler implements UpdateHandler {
+public class SimpleUpdateHandler implements UpdatesListener {
 
 	/** The Constant LOGGER. */
 	public static final Logger LOGGER = LogManager.getLogger();
 
-	public void onCallbackQueryReceived(TelegramBotApi arg0, int arg1, CallbackQuery arg2) {
-	}
+	@Autowired
+	private TelegramBot bot;
 
-	public void onChosenInlineResultReceived(TelegramBotApi arg0, int arg1, ChosenInlineResult arg2) {
-	}
+	
+	@Override
+	public int process(List<Update> updates) {
+		
+		SendMessage request = new SendMessage(updates.get(0).message().from().id(), "hello World")
+		        .parseMode(ParseMode.HTML)
+		        .disableWebPagePreview(true)
+		        .disableNotification(true)
+		        .replyToMessageId(1)
+		        .replyMarkup(new ForceReply());
 
-	public void onEditedMessageReceived(TelegramBotApi arg0, int arg1, Message arg2) {
-	}
-
-	public void onGetUpdatesFailure(Exception e) {
-		LOGGER.error("Error occured on Update Handler ", e);
-	}
-
-	public void onInlineQueryReceived(TelegramBotApi arg0, int arg1, InlineQuery arg2) {
-	}
-
-	public void onMessageReceived(TelegramBotApi telegramBotApi, int id, Message message) {
-		try {
-			LOGGER.info(" The recived message: " + message.getText());
-			String response = "Dummy respone from the bot";
-			ApiBuilder.api(telegramBotApi).sendMessage(response).toChatId(message.getChat().getId())
-					.asReplyToMessage(message.getMessageId()).asSilentMessage().parseMessageAs(ParseMode.MARKDOWN)
-					.execute();
-		} catch (NegativeResponseException | IOException e) {
-			LOGGER.error("Error occured on Update Handler ", e);
-		}
-
+		// sync
+		bot.execute(request);
+		
+		return 0;
 	}
 
 }
