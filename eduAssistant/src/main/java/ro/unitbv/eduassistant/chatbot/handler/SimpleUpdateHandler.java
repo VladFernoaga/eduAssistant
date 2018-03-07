@@ -13,7 +13,6 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.ForceReply;
 import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.request.SendMessage;
-import com.pengrad.telegrambot.response.SendResponse;
 
 @Service
 public class SimpleUpdateHandler implements UpdatesListener {
@@ -28,17 +27,21 @@ public class SimpleUpdateHandler implements UpdatesListener {
 	@Override
 	public int process(List<Update> updates) {
 		
-		SendMessage request = new SendMessage(updates.get(0).message().from().id(), "hello World")
-		        .parseMode(ParseMode.HTML)
-		        .disableWebPagePreview(true)
-		        .disableNotification(true)
-		        .replyToMessageId(1)
-		        .replyMarkup(new ForceReply());
-
-		// sync
-		bot.execute(request);
+		for (Update update : updates) {
+			Integer chatId = update.message().from().id();
+			String messageText = update.message().text();
+			Integer messageId = update.message().messageId();
+			
+			SendMessage request = new SendMessage(chatId, String.format("<b>Hello World</b> I recived your message: %s",messageText))
+					.parseMode(ParseMode.HTML)
+					.disableNotification(false)
+					.replyToMessageId(messageId)
+					.replyMarkup(new ForceReply())
+					;
+			bot.execute(request);
+		}
 		
-		return 0;
+		return UpdatesListener.CONFIRMED_UPDATES_ALL;
 	}
 
 }
