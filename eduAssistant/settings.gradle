@@ -1,1 +1,9 @@
 rootProject.name = 'eduAssistant'
+include 'security'
+include 'core'
+include 'jtelegrambot-core'
+include 'jtelegram-builders'
+
+rootProject.children.each {
+  it.buildFileName = it.name + '.gradle'
+}

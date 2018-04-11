@@ -1,0 +1,6 @@
+
+dependencies {
+	compile project(':jtelegrambot-core')
+	testCompile "junit:junit:3.8.1"
+}
+

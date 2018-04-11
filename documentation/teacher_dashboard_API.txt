@@ -1,0 +1,176 @@
+
+LOGIN:
+		POST: /login
+		HEADERS:
+			Content-Type: application/json
+		BODY:
+			{
+				"username": "<the teacher username>",
+				"password": "<the password>"
+			}
+		RESPONSE:
+			200
+				{
+					"token": "<the token>"
+				}
+			401
+				-Unauthorized 
+
+LESSON:
+		POST: lesson/{teacherId}
+		HEADERS:
+			Content-Type: "application/json"
+			Authorization: "Bearer <jwtToken>"
+		BODY:
+			{
+				"name": "<the lesson name>",
+				"description": "<the lesson description>",
+				"teacherId": "<the creator id>"
+			}
+		RESPONSE:
+			201:
+				{
+					"name": "<the lesson name>",
+					"description": "<the lesson description>"
+				}
+			500:
+				{
+					"message": "The teacher id doesn't exist"
+				}
+
+		GET: lesson/{teacherId}
+		HEADERS:
+			Content-Type: "application/json"
+			Authorization: "Bearer <jwtToken>"
+		BODY:
+			{}
+		RESPONSE:
+			200:
+				{
+					lessons: 
+						[
+							{
+								"id": "<the lesson id>",
+								"name": "<the lesson name>",
+								"description": "<the lesson description>"
+								"questions":
+									[
+										{
+											"question" : "<question-text>",
+											"variants":{
+											  "1": {"value": "<Variant1>", "hint": "<hint-text>"},
+											  "2": { "value": "<Variant2>", "hint": "<hint-text>"},
+											  "3": { "value": "<Variant3>", "hint": null},
+											  "4": { "value": "<Variant4>", "hint": "<hint-text>"}
+											}
+										}
+									]
+							}
+						]
+
+				}
+			500:
+				{
+					"message": "The teacher id doesn't exist"
+				}
+		
+LESSON/QUESTION:		
+		POST: /lesson/{teacherId}/{lessonId}/question
+		HEADERS:
+			Content-Type: "application/json"
+			Authorization: "Bearer <jwtToken>"
+		BODY:
+			{
+				"question" : "<question-text>",
+				"variants":{
+				  "1": {"value": "<Variant1>", "hint": "<hint-text>"},
+				  "2": { "value": "<Variant2>", "hint": "<hint-text>"},
+				  "3": { "value": "<Variant3>", "hint": null},
+				  "4": { "value": "<Variant4>", "hint": "<hint-text>"}
+				}
+			}
+		RESPONSE:
+			201:
+				{
+					"id": "<the question id>",
+					"question" : "<question-text>"
+				}
+			500:
+				{
+					"message": "The lesson id doesn't exist"
+				}
+LESSON/SESSION:
+		Description: this method opens a new session for the lesson 
+		POST: /lesson/{teacherId}/{lessonId}/session
+		HEADERS:
+			Content-Type: "application/json"
+			Authorization: "Bearer <jwtToken>"
+		BODY:
+			{	}
+		RESPONSE:
+			200:
+				{
+					"sessionId": "<the session id>",
+				}
+			500:
+				{
+					"message": "The lessonId id doesn't exist"
+				}
+			500:
+				{
+					"message": "The lessonId with id <id> has already a open session"
+				}
+		
+		Description: this method closes the session for the lesson 
+		PATCH: /lesson/{teacherId}/{lessonId}/session
+		HEADERS:
+			Content-Type: "application/json"
+			Authorization: "Bearer <jwtToken>"
+		BODY:
+			{	}
+		RESPONSE:
+			200:
+				{
+					"sessionId": "<the session id>",
+				}
+			500:
+				{
+					"message": "The lessonId id doesn't exist"
+				}
+			500:
+				{
+					"message": "The lessonId with id <id> is already closed"
+				}
+
+		Description: this method returns the  state (open/close) and session id of the session 
+		GET: /lesson/{teacherId}/{lessonId}/session
+		HEADERS:
+			Content-Type: "application/json"
+			Authorization: "Bearer <jwtToken>"
+		BODY:
+			{	}
+		RESPONSE:
+			200:
+				{
+					"state": "<open>/<close>",
+					"sessionId": "<the session id>",
+				}
+			500:
+				{
+					"message": "The lessonId id doesn't exist"
+				}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
