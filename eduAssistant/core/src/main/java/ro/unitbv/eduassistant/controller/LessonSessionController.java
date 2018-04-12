@@ -21,7 +21,7 @@ public class LessonSessionController {
 
 	@RequestMapping(value = "/lesson", method = RequestMethod.POST)
 	public ResponseEntity<LessonSessionDto> createLesson(@RequestBody LessonDto lesson) {
-		lessonService.createLesson(lesson);
+//		lessonService.createLesson(lesson);
 		return ResponseEntity.ok().build();
 	}
 	

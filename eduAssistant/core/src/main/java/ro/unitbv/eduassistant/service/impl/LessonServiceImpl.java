@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ro.unitbv.eduassistant.api.exception.EduAssistantApiException;
 import ro.unitbv.eduassistant.dto.LessonDto;
 import ro.unitbv.eduassistant.dto.QuestionDto;
 import ro.unitbv.eduassistant.model.Lesson;
@@ -36,19 +37,19 @@ public class LessonServiceImpl implements LessonService {
 	private QuestionRepo questionRepo;
 
 	@Override
-	public void createLesson(LessonDto lessonDto) {
+	public LessonDto addLesson(Long teacherId, LessonDto lessonDto) {
 
-		Optional<Teacher> teacher = teacherRepo.findById(lessonDto.getTeacherId());
+		Optional<Teacher> teacher = teacherRepo.findById(teacherId);
 		if (teacher.isPresent()) {
 			Lesson lesson = new Lesson();
 			lesson.setName(lessonDto.getName());
 			lesson.setDescription(lessonDto.getDescription());
 			lesson.setTeacher(teacher.get());
-			lessonRepo.save(lesson);
+			lesson = lessonRepo.save(lesson);
+			return new LessonDto(lesson.getId(), lesson.getName(), lesson.getDescription());
 		} else {
-			throw new IllegalArgumentException(
-					String.format("The given teacher with id: %s is not existing. The lesson cannot be created",
-							lessonDto.getTeacherId()));
+			throw new EduAssistantApiException(String
+					.format("The given teacher with id: %s is not existing. The lesson cannot be created", teacherId));
 		}
 	}
 

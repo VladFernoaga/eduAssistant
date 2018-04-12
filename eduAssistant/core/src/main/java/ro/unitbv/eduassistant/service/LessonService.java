@@ -5,7 +5,7 @@ import ro.unitbv.eduassistant.dto.QuestionDto;
 
 public interface LessonService {
 
-	void createLesson(LessonDto lessonDto);
+	LessonDto addLesson(Long teacherId, LessonDto lessonDto);
 	
 	String createSessionForLesson(Long lessonId);
 	

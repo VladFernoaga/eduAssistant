@@ -1,13 +1,16 @@
 package ro.unitbv.eduassistant.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class LessonDto {
 
+	private Long id; 
 	private String name;
 	private String description;
-	private long teacherId;
+	
 }
