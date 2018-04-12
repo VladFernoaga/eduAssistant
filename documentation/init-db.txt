@@ -1,0 +1,8 @@
+
+INSERT INTO public.users(enabled,password,username) VALUES(true,'$2a$10$RX6NhOUCQOv6LDZifxCbwu7ylKH7lLUHzhi3ebjf9No0f0DE71R8W','testTeacher1'); --pass: teacher1
+INSERT INTO public.users(enabled,password,username) VALUES(true,'$2a$10$bYkG6FmWiQ4BwAwM0p8LXetGWD1btUmIuP0GY5yCIC66rhc68.OL.','testTeacher2'); --pass: teacher2
+INSERT INTO public.users(enabled,password,username) VALUES(true,'$2a$10$LYeh3CCvKecvdnNpkSEXKOklw5cwEGCckfbEnv6QVRxheHWEl8A5u','testTeacher3'); --pass: teacher3
+
+INSERT INTO public.teacher(name, username) VALUES('Ionescu Popescu','testTeacher1');
+INSERT INTO public.teacher(name, username) VALUES('Valentin Ion','testTeacher2');
+INSERT INTO public.teacher(name, username) VALUES('George Marian','testTeacher3');

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import io.fouad.jtb.core.JTelegramBot;
 
@@ -19,11 +20,25 @@ public class ChatbotStarter {
 	@Autowired
 	private JTelegramBot bot;
 	
-//	@Bean
-//	public CommandLineRunner run() {
-//		return (args) -> {
-//			LOGGER.info("Start the registered chatbot");
+	@Autowired
+	PasswordEncoder pwdEncode;
+	
+	@Bean
+	public CommandLineRunner run() {
+		return (args) -> {
+			LOGGER.info("Start the registered chatbot");
 //			bot.start();
-//		};
-//	}
+		};
+	}
+	
+	@Bean("defaultpasswdGen")
+	public CommandLineRunner genDefaultPasswd() {
+		return (args) -> {
+			LOGGER.debug(() ->"Generate default passwords");
+			
+			LOGGER.debug(() -> "Password: teacher1 -> Encrypted: ["+pwdEncode.encode("teacher1")+"]");
+			LOGGER.debug(() -> "Password: teacher2 -> Encrypted: ["+pwdEncode.encode("teacher2")+"]");
+			LOGGER.debug(() -> "Password: teacher3 -> Encrypted: ["+pwdEncode.encode("teacher3")+"]");
+		};
+	}
 }

@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +23,9 @@ public class Teacher {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
+	
+	@Column(name = "username")
+	private String username;
 	
 	@Column(name = "name",unique=true)
 	private String name;

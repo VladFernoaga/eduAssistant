@@ -11,7 +11,9 @@ LOGIN:
 		RESPONSE:
 			200
 				{
-					"token": "<the token>"
+					"token": "<the token>",
+					"idUser": 1,
+					"username" "<theUsername>"
 				}
 			401
 				-Unauthorized 

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import io.fouad.jtb.core.JTelegramBot;
 import ro.unitbv.eduassistant.chatbot.handler.EduAssistantUpdateHandler;
@@ -30,5 +32,10 @@ public class BeanConfig {
 		LOGGER.info("Initilizate the chatbot with name: "+BOOT_NAME_PROD);
 		JTelegramBot bot = new JTelegramBot(BOOT_NAME_PROD, API_TOKEN_PROD, updateHandler);
 		return bot;
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+	    return new BCryptPasswordEncoder();
 	}
 }
