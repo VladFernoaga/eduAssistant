@@ -9,4 +9,6 @@ import ro.unitbv.eduassistant.model.LessonSession;
 public interface LessonSessionRepo  extends JpaRepository<LessonSession, Long>{
 
 	Optional<LessonSession> findBySessionKey(String sessionKey); 
+	
+	Optional<LessonSession> findByLessonIdAndState(Long lessonId, String state);
 }

@@ -28,8 +28,10 @@ public class LessonSession {
 	private Long id;
 	
 	@Column(name = "session_key",unique=true)
-	
 	private String sessionKey;
+	@Column(name = "state")
+	private String state;
+	
 	@ManyToOne
 	private Lesson lesson;
 	

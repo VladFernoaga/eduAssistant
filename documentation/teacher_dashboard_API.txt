@@ -59,6 +59,7 @@ LESSON:
 								"questions":
 									[
 										{
+											"id": 3,
 											"question" : "<question-text>",
 											"variants":{
 											  "1": {"value": "<Variant1>", "hint": "<hint-text>"},
@@ -113,6 +114,7 @@ LESSON/SESSION:
 		RESPONSE:
 			200:
 				{
+					"state": "<open>/<close>",
 					"sessionId": "<the session id>",
 				}
 			500:
@@ -134,6 +136,7 @@ LESSON/SESSION:
 		RESPONSE:
 			200:
 				{
+					"state": "<open>/<close>",
 					"sessionId": "<the session id>",
 				}
 			500:
@@ -163,8 +166,26 @@ LESSON/SESSION:
 					"message": "The lessonId id doesn't exist"
 				}
 
-
-
+TRIGGER QUESTION:
+		Description: this method triggers a question for the open session of a lesson 
+		POST: /lesson/{teacherUsername}/{lessonid}/{questionId}/trigger
+		HEADERS:
+			Content-Type: "application/json"
+			Authorization: "Bearer <jwtToken>"
+		BODY:
+			{	}
+		RESPONSE:
+			200:
+				{}
+			500:
+				{
+					"message": "The lessonId id doesn't exist"
+				}
+			500:
+				{
+					"message": "The questionId with id <id> doesn't exist"
+				}
+		
 
 
 

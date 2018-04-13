@@ -1,4 +1,4 @@
-package ro.unitbv.eduassistant.controller.v2;
+package ro.unitbv.eduassistant.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ro.unitbv.eduassistant.api.exception.EduAssistantApiException;
 import ro.unitbv.eduassistant.dto.LessonDto;
+import ro.unitbv.eduassistant.dto.LessonsResponse;
 import ro.unitbv.eduassistant.dto.QuestionAddResponse;
 import ro.unitbv.eduassistant.dto.QuestionDto;
 import ro.unitbv.eduassistant.service.AuthorizationService;
@@ -30,7 +31,7 @@ public class LessonController {
 	private AuthorizationService authService;
 	
 	@RequestMapping(value = "/lesson/{teacherUsername}", method = RequestMethod.POST)
-	public ResponseEntity<LessonDto> createLesson(@PathVariable("teacherUsername") String username, @RequestBody LessonDto lesson) {
+	public ResponseEntity<LessonDto> addLesson(@PathVariable("teacherUsername") String username, @RequestBody LessonDto lesson) {
 		LessonDto lessonDto = lessonService.addLesson(authService.getTeacherIdBasedOn(username), lesson);
 		return new ResponseEntity<LessonDto>(lessonDto, HttpStatus.CREATED);
 	}
@@ -51,4 +52,12 @@ public class LessonController {
 		QuestionAddResponse rsp = lessonService.addQuestion(question, lessonId);
 		return new ResponseEntity<QuestionAddResponse>(rsp, HttpStatus.CREATED);
 	}
+	
+	@RequestMapping(value = "/lesson/{teacherUsername}", method = RequestMethod.GET)
+	public ResponseEntity<LessonsResponse> getTeacherLessons(@PathVariable("teacherUsername") String username) {
+		LessonsResponse lessons = lessonService.getLessonsForTeacher(authService.getTeacherIdBasedOn(username));
+		return new ResponseEntity<LessonsResponse>(lessons, HttpStatus.OK);
+	}
+	
+	
 }

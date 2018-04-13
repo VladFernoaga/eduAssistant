@@ -11,6 +11,7 @@ import ro.unitbv.eduassistant.dto.report.AllLessonQuestionDto;
 import ro.unitbv.eduassistant.dto.report.LessonOverviewDto;
 import ro.unitbv.eduassistant.dto.report.QuestionInfoDto;
 import ro.unitbv.eduassistant.dto.report.QuestionStatsDto;
+import ro.unitbv.eduassistant.service.AuthorizationService;
 import ro.unitbv.eduassistant.service.ReportService;
 
 @RestController
@@ -18,24 +19,41 @@ public class ReportController {
 
 	@Autowired
 	private ReportService reportService;
+	@Autowired
+	private AuthorizationService authService;
 	
-	@RequestMapping(value = "/report/allquestions", method = RequestMethod.GET)
-	public ResponseEntity<AllLessonQuestionDto> allReportQuestions() {
+	@RequestMapping(value = "/report/{teacherUsername}/{lessonId}/{sessionId}/allquestions", method = RequestMethod.GET)
+	public ResponseEntity<AllLessonQuestionDto> allReportQuestions(@PathVariable("teacherUsername") String username,
+			@PathVariable("lessonId") long lessonId, @PathVariable("sessionId") String sessionId) {
+		authService.getTeacherIdBasedOn(username);
+		//TODO IMPL
+		
 		return ResponseEntity.ok().body(reportService.getAllLessionQuestionReport(1L));
 	}
-	
-	@RequestMapping(value = "/report/question/{id}", method = RequestMethod.GET)
-	public ResponseEntity<QuestionStatsDto> questionStats(@PathVariable("id") Long questionId) {
+
+	@RequestMapping(value = "/report/{teacherUsername}/{lessonId}/{sessionId}/question/{questionId}", method = RequestMethod.GET)
+	public ResponseEntity<QuestionStatsDto> questionStats(@PathVariable("teacherUsername") String username,
+			@PathVariable("lessonId") long lessonId, @PathVariable("sessionId") String sessionId,
+			@PathVariable("questionId") Long questionId) {
+		authService.getTeacherIdBasedOn(username);
+		//TODO IMPL
 		return ResponseEntity.ok().body(reportService.getQuestionStats(questionId));
 	}
-	
-	@RequestMapping(value = "/report/question/{id}/info", method = RequestMethod.GET)
-	public ResponseEntity<QuestionInfoDto> questionStatsInfo(@PathVariable("id") Long questionId) {
+
+	@RequestMapping(value = "/report/{teacherUsername}/{lessonId}/{sessionId}/question/{id}/info", method = RequestMethod.GET)
+	public ResponseEntity<QuestionInfoDto> questionStatsInfo(@PathVariable("teacherUsername") String username,
+			@PathVariable("lessonId") long lessonId, @PathVariable("sessionId") String sessionId,
+			@PathVariable("questionId") Long questionId) {
+		authService.getTeacherIdBasedOn(username);
+		//TODO IMPL
 		return ResponseEntity.ok().body(reportService.getQuestionInfo(questionId));
 	}
-	
-	@RequestMapping(value = "/report/overview", method = RequestMethod.GET)
-	public ResponseEntity<LessonOverviewDto> lessonOverview() {
+
+	@RequestMapping(value = "/report/{teacherUsername}/{lessonId}/{sessionId}overview", method = RequestMethod.GET)
+	public ResponseEntity<LessonOverviewDto> lessonOverview(@PathVariable("teacherUsername") String username,
+			@PathVariable("lessonId") long lessonId, @PathVariable("sessionId") String sessionId) {
+		authService.getTeacherIdBasedOn(username);
+		//TODO IMPL
 		return ResponseEntity.ok().body(reportService.getLessonOverview(1L));
 	}
 

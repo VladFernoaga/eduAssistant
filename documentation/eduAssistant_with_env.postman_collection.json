@@ -59,7 +59,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{base_url}}/lesson/{teacherId}/{lessonId}/session",
+			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/session",
 			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
 			"queryParams": [],
 			"preRequestScript": null,
@@ -72,7 +72,7 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1523448677208,
+			"time": 1523626314349,
 			"name": "Start lesson ",
 			"description": "",
 			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
@@ -96,25 +96,24 @@
 					"enabled": true
 				}
 			],
-			"url": "{{base_url}}/lesson/{teacherId}/{lessonId}/session",
+			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/session",
+			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
 			"queryParams": [],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "PATCH",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
 			"data": [],
 			"dataMode": "raw",
-			"name": "Stop lesson ",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1523448716609,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
+			"time": 1523626494471,
+			"name": "Stop lesson ",
+			"description": "",
+			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
+			"responses": [],
 			"rawModeData": ""
 		},
 		{
@@ -215,25 +214,24 @@
 					"enabled": true
 				}
 			],
-			"url": "{{base_url}}/lesson/{teacherId}",
+			"url": "{{base_url}}/lesson/{{username}}",
+			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
 			"queryParams": [],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "GET",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
 			"data": [],
 			"dataMode": "raw",
-			"name": "Get lessons",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1523447870275,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
+			"time": 1523619125217,
+			"name": "Get lessons",
+			"description": "",
+			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
+			"responses": [],
 			"rawModeData": "{\r\n\t\"name\": \"<the lesson name>\",\r\n\t\"description\": \"<the lesson description>\"\r\n}"
 		},
 		{
@@ -283,7 +281,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{base_url}}/lesson/{teacherId}/{lessonId}/question",
+			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/question",
 			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
 			"queryParams": [],
 			"preRequestScript": null,
@@ -296,12 +294,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1523448537439,
+			"time": 1523612432748,
 			"name": "Add question to lesson",
 			"description": "",
 			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
 			"responses": [],
-			"rawModeData": "{\r\n\t\"question\" : \"<question-text>\",\r\n\t\"variants\":{\r\n\t\t\"1\": {\"value\": \"<Variant1>\", \"hint\": \"<hint-text>\"},\r\n\t\t\"2\": { \"value\": \"<Variant2>\", \"hint\": \"<hint-text>\"},\r\n\t\t\"3\": { \"value\": \"<Variant3>\", \"hint\": null},\r\n\t\t\"4\": { \"value\": \"<Variant4>\", \"hint\": \"<hint-text>\"}\r\n\t}\r\n}"
+			"rawModeData": "{\r\n\t\"question\" : \"<question-text>\",\r\n\t\"variants\":[\r\n\t\t\t{ \"value\": \"<Variant1>\", \"hint\": \"<hint-text>\"},\r\n\t\t\t{ \"value\": \"<Variant2>\", \"hint\": \"<hint-text>\"},\r\n\t\t\t{ \"value\": \"<Variant3>\", \"hint\": null},\r\n\t\t\t{ \"value\": \"<Variant4>\", \"hint\": \"<hint-text>\"}\r\n\t\t]\r\n\t\r\n}\r\n"
 		},
 		{
 			"id": "49951dfb-4dda-58f3-75e8-1203e21a5b24",
@@ -432,25 +430,24 @@
 					"enabled": true
 				}
 			],
-			"url": "{{base_url}}/lesson/{teacherId}/{lessonId}/session",
+			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/session",
+			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
 			"queryParams": [],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
 			"method": "GET",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
 			"data": [],
 			"dataMode": "raw",
-			"name": "Show lesson session status ",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1523448764255,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
+			"time": 1523626302381,
+			"name": "Show lesson session status ",
+			"description": "",
+			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
+			"responses": [],
 			"rawModeData": ""
 		},
 		{
@@ -537,8 +534,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{base_url}}/login",
-			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
+			"url": "{{base_url}}/login/",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -546,15 +542,15 @@
 			"method": "POST",
 			"data": [],
 			"dataMode": "raw",
-			"tests": null,
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"jwtToken\", jsonData.token);\npostman.setEnvironmentVariable(\"idUser\", jsonData.idUser);\npostman.setEnvironmentVariable(\"username\", jsonData.username);\ntests[\"Successful POST request\"] = responseCode.code === 200;\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1523437731120,
+			"time": 1523543825936,
 			"name": "teacher login",
 			"description": "",
 			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
 			"responses": [],
-			"rawModeData": "{\r\n\t\"username\": \"<the teacher username>\",\r\n\t\"password\": \"<the password>\"\r\n}"
+			"rawModeData": "{\r\n\t\"username\": \"testTeacher1\",\r\n\t\"password\": \"teacher1\"\r\n}"
 		},
 		{
 			"id": "d77054a6-52e5-e267-db77-5f061f710c06",
@@ -573,7 +569,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{base_url}}/lesson/{teacherId}",
+			"url": "{{base_url}}/lesson/{{username}}/",
 			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
 			"queryParams": [],
 			"preRequestScript": null,
@@ -583,15 +579,15 @@
 			"data": [],
 			"dataMode": "raw",
 			"version": 2,
-			"tests": null,
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"lessonId\", jsonData.id);\ntests[\"Successful POST request\"] = responseCode.code === 200;\n",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1523447794782,
+			"time": 1523629475589,
 			"name": "Add lesson",
 			"description": "",
 			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
 			"responses": [],
-			"rawModeData": "{\r\n\t\"name\": \"<the lesson name>\",\r\n\t\"description\": \"<the lesson description>\"\r\n}"
+			"rawModeData": "{\r\n\t\"name\": \"my lesson1\",\r\n\t\"description\": \"description\"\r\n}"
 		},
 		{
 			"id": "d9f753d5-52c8-e4e2-30db-a3dbebffd52a",
