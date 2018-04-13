@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -21,7 +22,8 @@ import lombok.Setter;
 public class LessonSession {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lesson_session_id_seq")
+	@SequenceGenerator(name = "lesson_session_id_seq", sequenceName = "lesson_session_id_seq", allocationSize = 2)
 	@Column(name = "id")
 	private Long id;
 	

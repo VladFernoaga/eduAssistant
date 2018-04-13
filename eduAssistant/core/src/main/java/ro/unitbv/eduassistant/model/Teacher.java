@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -20,16 +21,17 @@ import lombok.Setter;
 public class Teacher {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teacher_id_seq")
+	@SequenceGenerator(name = "teacher_id_seq", sequenceName = "teacher_id_seq", allocationSize = 2)
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "username")
 	private String username;
-	
-	@Column(name = "name",unique=true)
+
+	@Column(name = "name", unique = true)
 	private String name;
-	
-	@OneToMany(mappedBy="teacher")
+
+	@OneToMany(mappedBy = "teacher")
 	private List<Lesson> lessons;
 }

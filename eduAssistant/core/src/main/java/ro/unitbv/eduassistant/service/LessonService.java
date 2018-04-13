@@ -1,6 +1,7 @@
 package ro.unitbv.eduassistant.service;
 
 import ro.unitbv.eduassistant.dto.LessonDto;
+import ro.unitbv.eduassistant.dto.QuestionAddResponse;
 import ro.unitbv.eduassistant.dto.QuestionDto;
 
 public interface LessonService {
@@ -9,5 +10,5 @@ public interface LessonService {
 	
 	String createSessionForLesson(Long lessonId);
 	
-	void addQuestion(QuestionDto questionDto, long lessonId);
+	QuestionAddResponse addQuestion(QuestionDto questionDto, long lessonId);
 }

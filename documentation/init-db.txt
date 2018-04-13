@@ -3,6 +3,6 @@ INSERT INTO public.users(enabled,password,username) VALUES(true,'$2a$10$RX6NhOUC
 INSERT INTO public.users(enabled,password,username) VALUES(true,'$2a$10$bYkG6FmWiQ4BwAwM0p8LXetGWD1btUmIuP0GY5yCIC66rhc68.OL.','testTeacher2'); --pass: teacher2
 INSERT INTO public.users(enabled,password,username) VALUES(true,'$2a$10$LYeh3CCvKecvdnNpkSEXKOklw5cwEGCckfbEnv6QVRxheHWEl8A5u','testTeacher3'); --pass: teacher3
 
-INSERT INTO public.teacher(name, username) VALUES('Ionescu Popescu','testTeacher1');
-INSERT INTO public.teacher(name, username) VALUES('Valentin Ion','testTeacher2');
-INSERT INTO public.teacher(name, username) VALUES('George Marian','testTeacher3');
+INSERT INTO public.teacher(id, name, username) VALUES(nextval('teacher_id_seq'::regclass),'Ionescu Popescu','testTeacher1');
+INSERT INTO public.teacher(id, name, username) VALUES(nextval('teacher_id_seq'::regclass),'Valentin Ion','testTeacher2');
+INSERT INTO public.teacher(id, name, username) VALUES(nextval('teacher_id_seq'::regclass),'George Marian','testTeacher3');

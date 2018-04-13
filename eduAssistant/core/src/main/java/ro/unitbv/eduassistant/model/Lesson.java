@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -21,11 +22,12 @@ import lombok.Setter;
 public class Lesson {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "lesson_id_seq")
+	@SequenceGenerator(name = "lesson_id_seq", sequenceName = "lesson_id_seq", allocationSize = 3)
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "name",unique=true)
+	@Column(name = "name")
 	private String name;
 	
 	@Column(name = "description")

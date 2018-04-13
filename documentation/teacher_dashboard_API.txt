@@ -19,7 +19,7 @@ LOGIN:
 				-Unauthorized 
 
 LESSON:
-		POST: lesson/{teacherId}
+		POST: lesson/{teacherUsername}
 		HEADERS:
 			Content-Type: "application/json"
 			Authorization: "Bearer <jwtToken>"
@@ -32,6 +32,7 @@ LESSON:
 		RESPONSE:
 			201:
 				{
+					"id": 3,
 					"name": "<the lesson name>",
 					"description": "<the lesson description>"
 				}
@@ -40,7 +41,7 @@ LESSON:
 					"message": "The teacher id doesn't exist"
 				}
 
-		GET: lesson/{teacherId}
+		GET: lesson/{teacherUsername}
 		HEADERS:
 			Content-Type: "application/json"
 			Authorization: "Bearer <jwtToken>"
@@ -77,19 +78,19 @@ LESSON:
 				}
 		
 LESSON/QUESTION:		
-		POST: /lesson/{teacherId}/{lessonId}/question
+		POST: /lesson/{teacherUsername}/{lessonId}/question
 		HEADERS:
 			Content-Type: "application/json"
 			Authorization: "Bearer <jwtToken>"
 		BODY:
 			{
 				"question" : "<question-text>",
-				"variants":{
-				  "1": {"value": "<Variant1>", "hint": "<hint-text>"},
-				  "2": { "value": "<Variant2>", "hint": "<hint-text>"},
-				  "3": { "value": "<Variant3>", "hint": null},
-				  "4": { "value": "<Variant4>", "hint": "<hint-text>"}
-				}
+				"variants":[
+				  { "value": "<Variant1>", "hint": "<hint-text>"},
+				  { "value": "<Variant2>", "hint": "<hint-text>"},
+				  { "value": "<Variant3>", "hint": null},
+				  { "value": "<Variant4>", "hint": "<hint-text>"}
+				]
 			}
 		RESPONSE:
 			201:
@@ -103,7 +104,7 @@ LESSON/QUESTION:
 				}
 LESSON/SESSION:
 		Description: this method opens a new session for the lesson 
-		POST: /lesson/{teacherId}/{lessonId}/session
+		POST: /lesson/{teacherUsername}/{lessonId}/session
 		HEADERS:
 			Content-Type: "application/json"
 			Authorization: "Bearer <jwtToken>"
@@ -124,7 +125,7 @@ LESSON/SESSION:
 				}
 		
 		Description: this method closes the session for the lesson 
-		PATCH: /lesson/{teacherId}/{lessonId}/session
+		PATCH: /lesson/{teacherUsername}/{lessonId}/session
 		HEADERS:
 			Content-Type: "application/json"
 			Authorization: "Bearer <jwtToken>"
@@ -145,7 +146,7 @@ LESSON/SESSION:
 				}
 
 		Description: this method returns the  state (open/close) and session id of the session 
-		GET: /lesson/{teacherId}/{lessonId}/session
+		GET: /lesson/{teacherUsername}/{lessonId}/session
 		HEADERS:
 			Content-Type: "application/json"
 			Authorization: "Bearer <jwtToken>"

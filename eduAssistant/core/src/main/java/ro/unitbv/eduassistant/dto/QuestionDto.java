@@ -1,17 +1,13 @@
 package ro.unitbv.eduassistant.dto;
 
-import java.util.Map;
+import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class QuestionDto {
 
 	private String question;
+	private List<VariantValueDto> variants;
 	
-	private Map<Integer,VariantValueDto> variants;
-	
-	private int correctVariant;
 }

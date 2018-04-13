@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.apache.logging.log4j.LogManager;
@@ -32,7 +33,8 @@ public class Question extends JsonbValue {
 	private static final Logger LOGGER = LogManager.getLogger();
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "question_id_seq")
+	@SequenceGenerator(name = "question_id_seq", sequenceName = "question_id_seq", allocationSize = 5)
 	@Column(name = "id")
 	private Long id;
 
