@@ -27,7 +27,7 @@ public class ChatbotStarter {
 	public CommandLineRunner run() {
 		return (args) -> {
 			LOGGER.info("Start the registered chatbot");
-//			bot.start();
+			bot.start();
 		};
 	}
 	

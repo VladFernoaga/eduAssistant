@@ -15,7 +15,6 @@ import ro.unitbv.eduassistant.dto.LessonWithQuestionsDto;
 import ro.unitbv.eduassistant.dto.LessonsResponse;
 import ro.unitbv.eduassistant.dto.QuestionAddResponse;
 import ro.unitbv.eduassistant.dto.QuestionDto;
-import ro.unitbv.eduassistant.dto.VariantValueDto;
 import ro.unitbv.eduassistant.model.Lesson;
 import ro.unitbv.eduassistant.model.MultipleChoiceQuestion;
 import ro.unitbv.eduassistant.model.Question;
@@ -69,18 +68,25 @@ public class LessonServiceImpl implements LessonService {
 		question.setLesson(lesson);
 		question.setQuestion(questionDto.getQuestion());
 
+		Counter counter= new Counter();
 		MultipleChoiceQuestion mcQuest = new MultipleChoiceQuestion();
-		mcQuest.setCorrectVriant(getCorrectVariant(questionDto.getVariants()));
-		mcQuest.setVariants(questionDto.getVariants().stream().map(v -> new VariantValue(v.getValue(), v.getHint()))
+		mcQuest.setVariants(questionDto.getVariants().stream().map(v -> new VariantValue(counter.next(),v.getValue(), v.getHint()))
 				.collect(Collectors.toList()));
-		question.setMultipeChoiceQuestion(mcQuest);
+		mcQuest.setCorrectVriantId(getCorrectVariantId(mcQuest.getVariants()));
+			question.setMultipeChoiceQuestion(mcQuest);
 
 		questionRepo.save(question);
 		return new QuestionAddResponse(question.getId(), question.getQuestion());
 	}
 
-	private String getCorrectVariant(List<VariantValueDto> variants) {
-		List<VariantValueDto> correctVariants = variants.stream().filter(v -> v.getHint() == null)
+	private class Counter{
+		int i =0;
+		int next(){
+			return i++;
+		}
+	}
+	private int getCorrectVariantId(List<VariantValue> variants) {
+		List<VariantValue> correctVariants = variants.stream().filter(v -> v.getHint() == null)
 				.collect(Collectors.toList());
 		if (correctVariants.size() == 0) {
 			String msg = "The inserted Question has no correct Responses set.";
@@ -92,7 +98,7 @@ public class LessonServiceImpl implements LessonService {
 			LOGGER.error(msg);
 			throw new EduAssistantApiException(msg);
 		}
-		return correctVariants.get(0).getValue();
+		return correctVariants.get(0).getId();
 	}
 
 	@Override

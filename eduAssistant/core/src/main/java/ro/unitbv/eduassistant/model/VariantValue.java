@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VariantValue{
+	private int id;
 	private String value;
 	private String hint;
 }

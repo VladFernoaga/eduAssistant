@@ -3,10 +3,9 @@ package ro.unitbv.eduassistant.service.impl;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,11 @@ import ro.unitbv.eduassistant.model.Response;
 import ro.unitbv.eduassistant.model.Student;
 import ro.unitbv.eduassistant.repo.LessonRepo;
 import ro.unitbv.eduassistant.repo.QuestionRepo;
+import ro.unitbv.eduassistant.repo.RegistrationRepo;
+import ro.unitbv.eduassistant.repo.ResponseDao;
 import ro.unitbv.eduassistant.repo.StudentRepo;
 import ro.unitbv.eduassistant.service.ReportService;
+import ro.unitbv.eduassistant.util.Defaults;
 
 @Service
 public class ReportServiceImpl implements ReportService {
@@ -37,25 +39,34 @@ public class ReportServiceImpl implements ReportService {
 	private StudentRepo studRepo;
 	@Autowired
 	private QuestionRepo questRepo;
-
+	@Autowired
+	private ResponseDao responseDao;
+	
+	@Autowired
+	private RegistrationRepo registrationRepo;
+	
 	@Override
-	public AllLessonQuestionDto getAllLessionQuestionReport(Long lessonId) {
-
+	public AllLessonQuestionDto generateLessonReport(long lessonId, String sessionId) {
 		Lesson lesson = lessonRepo.findById(lessonId)
 				.orElseThrow(() -> new IllegalArgumentException(String.format("Unknown lessonId: %s", lessonId)));
 
 		AllLessonQuestionDto report = new AllLessonQuestionDto();
-		report.setTotalStudNr(studRepo.count());
+		report.setTotalStudNr(registrationRepo.getNumberOfRegistrations(sessionId));
 
+		// TODO remove Id when the responses will be dynamic
+		int id = 1;
 		for (Question quest : lesson.getQuestions()) {
-			int id = Integer.valueOf(quest.getId() + "");
-
-			List<Response> responses = quest.getResponses().stream()
-					.filter(rsp -> rsp.getMultipleChoiceQuestion().isCorrect()).collect(Collectors.toList());
-			Set<Long> registrationIdWithCorrectAnswers = new HashSet<>();
-			responses.forEach(rsp -> registrationIdWithCorrectAnswers.add(rsp.getRegistration().getId()));
+			// TODO remove Id when the responses will be dynamic
+			if(id > 5){
+				break;
+			}
 			
-			int nrOfCorrectAnswers = registrationIdWithCorrectAnswers.size();
+			List<Response> correctResponses = responseDao
+					.findResponsesForQuestionIdAndSessionId(quest.getId(), sessionId).stream()
+					.filter(rsp -> rsp.getMultipleChoiceQuestion().isCorrect()).collect(Collectors.toList());
+
+			int nrOfCorrectAnswers = correctResponses.stream().map(rsp -> rsp.getRegistration().getId())
+					.collect(Collectors.toSet()).size();
 			switch (id) {
 			case 1:
 				report.setQuestion1(nrOfCorrectAnswers);
@@ -75,48 +86,44 @@ public class ReportServiceImpl implements ReportService {
 			default:
 				break;
 			}
+			// TODO remove Id when the responses will be dynamic
+			id++;
 		}
 
 		return report;
 	}
 
 	@Override
-	public QuestionStatsDto getQuestionStats(Long questionId) {
-		questRepo.findById(questionId)
-				.orElseThrow(() -> new IllegalArgumentException(String.format("Unknown questionId: %s", questionId)));
-
+	public QuestionStatsDto generateQuestionStats(long lessonId, long questionId, String sessionId) {
+		questRepo.findByIdAndLessonId(questionId,lessonId)
+				.orElseThrow(() -> new IllegalArgumentException(String.format("Unknown questionId: %s for the lesson %s", questionId,lessonId)));
+		
 		List<StudentQuestionStatDto> data = new ArrayList<>();
-
-		List<Student> students = studRepo.findAll();
-		for (Student stud : students) {
-
-			List<Registration> registrations = stud.getRegistrations();
-			if (registrations != null && !registrations.isEmpty()) {
-
-				List<Response> questionResponses = registrations.get(0).getResponses().stream()
+		for(Registration registration : registrationRepo.getRegistrations(sessionId)){
+				List<Response> questionResponses = registration.getResponses().stream()
 						.filter(r -> r.getQuestion().getId().equals(questionId)).collect(Collectors.toList());
-				Response finalResponse = null;
-
-				questionResponses.sort((q1, q2) -> (int) (q1.getId() - q2.getId()));
+				// Sort from the newest to the oldest response
+				questionResponses.sort((q1, q2) -> (int) (q2.getId() - q1.getId()));
+				
+				Optional<Response> lastResponse = Optional.empty();
 				if (!questionResponses.isEmpty()) {
-					finalResponse = questionResponses.get(questionResponses.size() - 1);
+					lastResponse = Optional.of(questionResponses.get(0));
 				}
 
 				StudentQuestionStatDto studStatDto = new StudentQuestionStatDto();
-				studStatDto.setName(stud.getName());
-				if (finalResponse != null) {
-					studStatDto.setStatus(finalResponse.getMultipleChoiceQuestion().isCorrect() ? "correct" : "wrong");
+				studStatDto.setName(registration.getStudent().getName());
+				if (lastResponse.isPresent()) {
+					studStatDto.setStatus(lastResponse.get().getMultipleChoiceQuestion().isCorrect() ? Defaults.RESPONSE_STATUS_CORRECT : Defaults.RESPONSE_STATUS_WRONG);
 				} else {
-					studStatDto.setStatus("pending");
+					studStatDto.setStatus(Defaults.RESPONSE_STATUS_PENDING);
 				}
 				data.add(studStatDto);
-			}
 		}
 		return new QuestionStatsDto(data);
 	}
 
 	@Override
-	public QuestionInfoDto getQuestionInfo(Long questionId) {
+	public QuestionInfoDto generateQuestionStatsInfo(long questionId, long lessonId, String sessionId) {
 		Question question = questRepo.findById(questionId)
 				.orElseThrow(() -> new IllegalArgumentException(String.format("Unknown questionId: %s", questionId)));
 
@@ -154,7 +161,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public LessonOverviewDto getLessonOverview(long lessonId) {
+	public LessonOverviewDto generateLessonOverview(long lessonId, String sessionId) {
 
 		List<StudentLessonOverviewDto> data = new ArrayList<>();
 

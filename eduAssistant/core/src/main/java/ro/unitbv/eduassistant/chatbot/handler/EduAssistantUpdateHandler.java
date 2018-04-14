@@ -28,9 +28,9 @@ public class EduAssistantUpdateHandler implements UpdateHandler {
 
 	/** The Constant LOGGER. */
 	public static final Logger LOGGER = LogManager.getLogger();
-	
-	private Gson gson  = new Gson();
-	
+
+	private Gson gson = new Gson();
+
 	@Autowired
 	private RegistrationService registrationService;
 	@Autowired
@@ -39,20 +39,22 @@ public class EduAssistantUpdateHandler implements UpdateHandler {
 	public void onCallbackQueryReceived(TelegramBotApi bot, int id, CallbackQuery callback) {
 		LOGGER.info("Response callback " + callback.getData() + "  callbackId " + callback.getId() + " mesageId "
 				+ callback.getMessage().getMessageId() + "  chatId " + callback.getFrom().getId());
-		CallbackData callBackData = gson.fromJson(callback.getData(),CallbackData.class);
-		
-		String hint = questionService.checkCorrectness(callBackData.getId(), callBackData.getValue(),callback.getFrom().getId());
+		CallbackData callBackData = gson.fromJson(callback.getData(), CallbackData.class);
+
+		String hint = questionService.checkCorrectness(callBackData.getSId(), callBackData.getQId(),
+				callBackData.getRId(), callback.getFrom().getId());
 		String msg = null;
 		if (hint == null) {
 			msg = "<b>Your response is correct</b>";
 		} else {
-			msg = String.format("<b>Your response is incorrect</b>. Here is a hint: <i>%s</i>    <b>Please try again!</b>",hint);
+			msg = String.format(
+					"<b>Your response is incorrect</b>. Here is a hint: <i>%s</i>    <b>Please try again!</b>", hint);
 		}
 		try {
 			ApiBuilder.api(bot).sendMessage(msg).toChatId(callback.getFrom().getId())
 					.asReplyToMessage(callback.getMessage().getMessageId()).asSilentMessage()
 					.parseMessageAs(ParseMode.HTML).execute();
-		} catch (NegativeResponseException | IOException  e) {
+		} catch (NegativeResponseException | IOException e) {
 			LOGGER.error("Error occured when tryning to reply to a message ", e);
 			throw new IllegalStateException("Error occured when tryning to reply to a message", e);
 		}
@@ -74,49 +76,49 @@ public class EduAssistantUpdateHandler implements UpdateHandler {
 	public void onMessageReceived(TelegramBotApi bot, int id, Message message) {
 		String messageText = message.getText();
 		String textWords[] = messageText.split("\\s+");
-		LOGGER.info(String.format("The recived message from chatId: %s contains following words: %s", message.getChat().getId(), Arrays.toString(textWords)));
-		
+		LOGGER.info(String.format("The recived message from chatId: %s contains following words: %s",
+				message.getChat().getId(), Arrays.toString(textWords)));
+
 		String command = textWords[0].toUpperCase();
 		switch (command) {
 		case "REG":
 			processCommandRegister(bot, message, textWords);
 			break;
 		default:
-			sendResponse(bot, message.getChat().getId(), message.getMessageId(), "*Please provide a valid command. Call help to see what's avaialable*");
+			sendResponse(bot, message.getChat().getId(), message.getMessageId(),
+					"*Please provide a valid command. Call help to see what's avaialable*");
 			break;
 		}
-	
 
 	}
-	
-	private void processCommandRegister(TelegramBotApi telegramBotApi,  Message message, String textWords[]){
+
+	private void processCommandRegister(TelegramBotApi telegramBotApi, Message message, String textWords[]) {
 		if (textWords.length <= 1) {
 			sendResponse(telegramBotApi, message.getChat().getId(), message.getMessageId(),
 					"*Please provide a session key for registration*");
 		} else {
 			String sessionKey = textWords[1];
-			String name ="";
-			if(message.getFrom().getFirstName() != null){
+			String name = "";
+			if (message.getFrom().getFirstName() != null) {
 				name = message.getFrom().getFirstName() + ", ";
 			}
-			if( message.getFrom().getLastName() != null){
-					name = message.getFrom().getLastName();
+			if (message.getFrom().getLastName() != null) {
+				name = message.getFrom().getLastName();
 			}
-			
+
 			String response = registrationService.registerNewStudentInSession(sessionKey, name,
 					message.getChat().getId());
 			sendResponse(telegramBotApi, message.getChat().getId(), message.getMessageId(), response);
 		}
 	}
-	
-	private void sendResponse(TelegramBotApi bot, long chatId, int messageId, String response){
+
+	private void sendResponse(TelegramBotApi bot, long chatId, int messageId, String response) {
 		try {
-			ApiBuilder.api(bot).sendMessage(response).toChatId(chatId)
-			.asReplyToMessage(messageId).asSilentMessage().parseMessageAs(ParseMode.MARKDOWN)
-			.execute();
+			ApiBuilder.api(bot).sendMessage(response).toChatId(chatId).asReplyToMessage(messageId).asSilentMessage()
+					.parseMessageAs(ParseMode.MARKDOWN).execute();
 		} catch (NegativeResponseException | IOException e) {
 			LOGGER.error("Error occured when tryning to reply to a message ", e);
-			throw new IllegalStateException("Error occured when tryning to reply to a message",e);
+			throw new IllegalStateException("Error occured when tryning to reply to a message", e);
 		}
 
 	}

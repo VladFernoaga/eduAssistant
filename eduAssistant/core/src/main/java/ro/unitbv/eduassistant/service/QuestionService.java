@@ -4,6 +4,6 @@ public interface QuestionService {
 
 	void sendQuestionToRegisteredStudents(String lessonSessionKey, long questionId);
 	
-	String checkCorrectness(Long questId, String selectedRsp, long chatId);
+	String checkCorrectness(Long lessonSessionId,Long questId, int selectedRspId, long chatId);
 
 }

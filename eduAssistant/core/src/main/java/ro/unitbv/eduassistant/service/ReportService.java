@@ -7,11 +7,11 @@ import ro.unitbv.eduassistant.dto.report.QuestionStatsDto;
 
 public interface ReportService {
 
-	AllLessonQuestionDto getAllLessionQuestionReport(Long lessonId);
+	AllLessonQuestionDto generateLessonReport(long lessonId, String sessionId);
 	
-	QuestionStatsDto getQuestionStats(Long questionId);
+	QuestionStatsDto generateQuestionStats(long lessonId,long questionId, String sessionId);
 
-	LessonOverviewDto getLessonOverview(long l);
+	LessonOverviewDto generateLessonOverview(long lessonId, String sessionId);
 
-	QuestionInfoDto getQuestionInfo(Long questionId);
+	QuestionInfoDto generateQuestionStatsInfo(long questionId, long lessonId, String sessionId);
 }

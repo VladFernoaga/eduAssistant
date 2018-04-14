@@ -1,49 +1,65 @@
 {
-	"id": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
+	"id": "19333da9-cfeb-64c9-5ea0-8940550923fc",
 	"name": "eduAssistant_with_env",
 	"description": "",
 	"order": [
-		"49951dfb-4dda-58f3-75e8-1203e21a5b24",
-		"2361bd2c-78d1-c695-c8ee-6720af1333a4",
-		"5286973c-d50e-aed3-cd3b-fa32dfa71f78",
-		"289badf4-e7f8-ae0e-8af4-72cdbaa544fd",
-		"9a712dda-1ef9-05b8-f2ca-36403b10e29c",
-		"2d298c26-00bb-7d92-ebbf-613b037af0cd",
-		"d9f753d5-52c8-e4e2-30db-a3dbebffd52a",
-		"4bc93f55-7fd0-faa4-0825-822f927a9106",
-		"3f360cba-e2db-f015-42f3-95afb84c1636",
-		"98bc3f78-106a-0128-762e-631c751da64e",
-		"4cd24226-03dc-621a-5731-20757247b5d4",
-		"816c89ac-c7e1-ad98-24c7-aba4d1380713"
+		"305a8a21-c01b-8cf9-238d-a899a1a892e6",
+		"60ec8069-4814-845c-7f6e-4534cc344ce8",
+		"293c12b0-be2e-5105-00d4-b500006acd2c",
+		"755c423f-db02-ea45-faa3-1475bf357f22",
+		"3cb85e04-a766-8e58-dc5f-73a8c0f067d1",
+		"dca04f0f-e63b-a4a2-7059-21b3f1bd6641",
+		"3b882278-ca6e-3d5e-c16c-dbb75f835dc9",
+		"4c18c2fc-8716-d727-4202-11709486e0d5",
+		"d63870a0-5503-219b-14c0-4cb63b12e8b3",
+		"55e369c0-1f28-64a3-95f8-b9bcc61ff93b",
+		"b8ac2ddd-9cb3-1988-8326-bfc45b18c3c7",
+		"b2341c80-21fc-f9b4-60f9-17c4a95649f4"
 	],
 	"folders": [
 		{
+			"name": "reports",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"order": [
+				"cd2c9ecc-f976-8ad3-2f01-5140f5a11eb1",
+				"71e89a7c-1c9a-ee0f-1f80-3ed8e72c03c2",
+				"c3621d7b-ccbd-821b-cefd-95f8ec1ac003",
+				"1015f424-2156-7cc4-db6b-fd678c22dc60"
+			],
+			"owner": "626622",
+			"folders_order": [],
+			"id": "f04c9e57-b3e9-547a-32c2-22d6b3e53835"
+		},
+		{
 			"name": "teacher_dashboard",
 			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
 			"order": [
-				"9d203c35-7293-a360-216a-8c07248e4fe6",
-				"d77054a6-52e5-e267-db77-5f061f710c06",
-				"44ee29b6-afa9-6709-3577-4bf21b26d76f",
-				"3d91ad4a-e3cb-3bf2-fff5-e4c7604f2d1f",
-				"042a7e3d-8708-f362-2379-0e914ef724f0",
-				"0c5de9f2-4da8-12ea-a2c2-9508086a810e",
-				"6bc723be-2485-8f26-8ff5-7a272faf59eb"
+				"b5dba5df-8c0c-90b6-2b4f-c9a60866cb9b",
+				"dbdd8fca-e90d-ab2f-ab5e-e43bf393bb2b",
+				"98ee3141-10e2-b5a7-83c1-38d5aab8a3ba",
+				"4809913c-c691-cae1-58ae-4390bb7d82b2",
+				"7370dd08-a540-e0d4-399f-dc0bd362e133",
+				"42d462c3-5d32-9469-b4c5-d73fe9c3504c",
+				"2031524f-2606-36cd-b808-fb0c0becdfb7",
+				"7537e2f7-d7d5-27d9-9f9f-b3dcf533f1a1"
 			],
-			"owner": 0,
+			"owner": "626622",
 			"folders_order": [],
-			"id": "f6ac66c9-8626-713d-ea20-36c74b53343a"
+			"id": "12018b24-468d-555a-419b-3c72340951d6"
 		}
 	],
 	"folders_order": [
-		"f6ac66c9-8626-713d-ea20-36c74b53343a"
+		"12018b24-468d-555a-419b-3c72340951d6",
+		"f04c9e57-b3e9-547a-32c2-22d6b3e53835"
 	],
 	"timestamp": 1516363489284,
-	"owner": 0,
+	"owner": "626622",
 	"public": false,
 	"requests": [
 		{
-			"id": "042a7e3d-8708-f362-2379-0e914ef724f0",
+			"id": "1015f424-2156-7cc4-db6b-fd678c22dc60",
 			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
 			"headerData": [
 				{
@@ -59,163 +75,8 @@
 					"enabled": true
 				}
 			],
-			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/session",
-			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1523626314349,
-			"name": "Start lesson ",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "0c5de9f2-4da8-12ea-a2c2-9508086a810e",
-			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "Authorization",
-					"value": "Bearer {{jwtToken}}",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/session",
-			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "PATCH",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1523626494471,
-			"name": "Stop lesson ",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "2361bd2c-78d1-c695-c8ee-6720af1333a4",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{base_url}}/lesson/1/session",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1516885407403,
-			"name": "Generate session",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "289badf4-e7f8-ae0e-8af4-72cdbaa544fd",
-			"headers": "",
-			"headerData": [],
-			"url": "{{base_url}}/question/1_1_2018-01-25_777/1",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1516885677894,
-			"name": "TriggerQuestion",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": []
-		},
-		{
-			"id": "2d298c26-00bb-7d92-ebbf-613b037af0cd",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{base_url}}/lesson/1/question",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1516885478638,
-			"name": "Add question 2",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": [],
-			"rawModeData": "{\n\t\"question\" : \"When did the first world war started?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"2011\", \"hint\": \"It was in the past century.\"},\n\t  \"2\": { \"value\": \"1847\", \"hint\": \"Not so much time in the past.\"},\n\t  \"3\": { \"value\": \"1914\", \"hint\": null},\n\t  \"4\": { \"value\": \"1935\", \"hint\": \"The question is about the first not the second World War.\"}\n\t},\n\t\"correctVariant\": 3\n}"
-		},
-		{
-			"id": "3d91ad4a-e3cb-3bf2-fff5-e4c7604f2d1f",
-			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "Authorization",
-					"value": "Bearer {{jwtToken}}",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{base_url}}/lesson/{{username}}",
-			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
+			"url": "{{base_url}}/report/{{username}}/{{lessonId}}/{{sessionId}}/lessonOverview",
+			"folder": "f04c9e57-b3e9-547a-32c2-22d6b3e53835",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -227,45 +88,15 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1523619125217,
-			"name": "Get lessons",
+			"time": 1523708055772,
+			"name": "Lesson overview report",
 			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
 			"responses": [],
 			"rawModeData": "{\r\n\t\"name\": \"<the lesson name>\",\r\n\t\"description\": \"<the lesson description>\"\r\n}"
 		},
 		{
-			"id": "3f360cba-e2db-f015-42f3-95afb84c1636",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{base_url}}/lesson/1/question",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1516885534230,
-			"name": "Add question 5",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": [],
-			"rawModeData": "{\n\t\"question\" : \"Who where the founders of Intel company?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"Gordon Moore and Robert Noyce\", \"hint\": null},\n\t  \"2\": { \"value\": \"Bill Gates\", \"hint\": \"It is a hardware company. Bill Gates is the software guy.\"},\n\t  \"3\": { \"value\": \"Larry Page and Sergey Brin\", \"hint\": \"Intel is older than Larry and Sergey, the Google founders.\"},\n\t  \"4\": { \"value\": \"Wolfgang Porsche\" , \"hint\": \"It's a microprocessor company not a car company.\"}\n\t},\n\t\"correctVariant\": 1\n}"
-		},
-		{
-			"id": "44ee29b6-afa9-6709-3577-4bf21b26d76f",
+			"id": "2031524f-2606-36cd-b808-fb0c0becdfb7",
 			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
 			"headerData": [
 				{
@@ -281,110 +112,29 @@
 					"enabled": true
 				}
 			],
-			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/question",
-			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1523612432748,
-			"name": "Add question to lesson",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"question\" : \"<question-text>\",\r\n\t\"variants\":[\r\n\t\t\t{ \"value\": \"<Variant1>\", \"hint\": \"<hint-text>\"},\r\n\t\t\t{ \"value\": \"<Variant2>\", \"hint\": \"<hint-text>\"},\r\n\t\t\t{ \"value\": \"<Variant3>\", \"hint\": null},\r\n\t\t\t{ \"value\": \"<Variant4>\", \"hint\": \"<hint-text>\"}\r\n\t\t]\r\n\t\r\n}\r\n"
-		},
-		{
-			"id": "49951dfb-4dda-58f3-75e8-1203e21a5b24",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{base_url}}/teacher",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1516885401774,
-			"name": "Create teacher",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": [],
-			"rawModeData": "{\n\t\"name\" :\"Vlad Fernoaga Info\"\n}"
-		},
-		{
-			"id": "4bc93f55-7fd0-faa4-0825-822f927a9106",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{base_url}}/lesson/1/question",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1516885529309,
-			"name": "Add question 4",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": [],
-			"rawModeData": "{\n\t\"question\" : \"Where was Napoleon Bonaparte born?\",\n\t\t\"variants\":{\n\t  \"1\": {\"value\": \"Brittany\", \"hint\": \"Think of a place that is not on the mainland.\"},\n\t  \"2\": { \"value\": \"Corsica\", \"hint\": null},\n\t  \"3\": { \"value\": \"Catalunia\", \"hint\": \"Come on, Napoleon was French!\"},\n\t  \"4\": { \"value\": \"Occitanie\", \"hint\": \"Think of a place that is not on the mainland.\"}\n\t},\n\t\"correctVariant\": 2\n}"
-		},
-		{
-			"id": "4cd24226-03dc-621a-5731-20757247b5d4",
-			"headers": "",
-			"headerData": [],
-			"url": "{{base_url}}/report/question/4",
+			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/session",
+			"folder": "12018b24-468d-555a-419b-3c72340951d6",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
 			"method": "GET",
-			"data": null,
-			"dataMode": "params",
+			"data": [],
+			"dataMode": "raw",
 			"version": 2,
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1516885579685,
-			"name": "Get Question  realtime stats",
+			"time": 1523626302381,
+			"name": "Show lesson session status ",
 			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": []
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
 		},
 		{
-			"id": "5286973c-d50e-aed3-cd3b-fa32dfa71f78",
+			"id": "293c12b0-be2e-5105-00d4-b500006acd2c",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
 				{
@@ -409,93 +159,13 @@
 			"time": 1516885467150,
 			"name": "Create Lesson",
 			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
 			"responses": [],
-			"rawModeData": "{\n\t\"name\" :\"Introductive lesson\",\n\t\"description\": \"This is just an example\",\n\t\"teacherId\": 1\n}"
+			"rawModeData": "{\n\t\"name\" :\"Introductive lesson\",\n\t\"description\": \"This is just an example\",\n\t\"teacherId\": 1\n}",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
 		},
 		{
-			"id": "6bc723be-2485-8f26-8ff5-7a272faf59eb",
-			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "Authorization",
-					"value": "Bearer {{jwtToken}}",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/session",
-			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": [],
-			"dataMode": "raw",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1523626302381,
-			"name": "Show lesson session status ",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": [],
-			"rawModeData": ""
-		},
-		{
-			"id": "816c89ac-c7e1-ad98-24c7-aba4d1380713",
-			"headers": "",
-			"headerData": [],
-			"url": "{{base_url}}/report/overview",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1516885587613,
-			"name": "Get overview",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": []
-		},
-		{
-			"id": "98bc3f78-106a-0128-762e-631c751da64e",
-			"headers": "",
-			"headerData": [],
-			"url": "{{base_url}}/report/allquestions",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"version": 2,
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1516885544193,
-			"name": "All question report",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": []
-		},
-		{
-			"id": "9a712dda-1ef9-05b8-f2ca-36403b10e29c",
+			"id": "305a8a21-c01b-8cf9-238d-a899a1a892e6",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
 				{
@@ -505,72 +175,7 @@
 					"enabled": true
 				}
 			],
-			"url": "{{base_url}}/lesson/1/question",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1516885397225,
-			"name": "Add question 1",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": [],
-			"rawModeData": "{\n\t\"question\" : \"What is the capital of Belgium?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"Venice\", \"hint\": \"It is true, this city is Europe. But is more to the North than Venice.\"},\n\t  \"2\": { \"value\": \"Beijing\", \"hint\": \"You better should think first about the continent.\"},\n\t  \"3\": { \"value\": \"Brusells\", \"hint\": null},\n\t  \"4\": { \"value\": \"London\", \"hint\": \"You are close, these cities are neighbors but the capital of Belgium is on the mainland.\"}\n\t},\n\t\"correctVariant\": 3\n\n\t\n}"
-		},
-		{
-			"id": "9d203c35-7293-a360-216a-8c07248e4fe6",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{base_url}}/login/",
-			"queryParams": [],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"jwtToken\", jsonData.token);\npostman.setEnvironmentVariable(\"idUser\", jsonData.idUser);\npostman.setEnvironmentVariable(\"username\", jsonData.username);\ntests[\"Successful POST request\"] = responseCode.code === 200;\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1523543825936,
-			"name": "teacher login",
-			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
-			"responses": [],
-			"rawModeData": "{\r\n\t\"username\": \"testTeacher1\",\r\n\t\"password\": \"teacher1\"\r\n}"
-		},
-		{
-			"id": "d77054a6-52e5-e267-db77-5f061f710c06",
-			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "Authorization",
-					"value": "Bearer {{jwtToken}}",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "{{base_url}}/lesson/{{username}}/",
-			"folder": "f6ac66c9-8626-713d-ea20-36c74b53343a",
+			"url": "{{base_url}}/teacher",
 			"queryParams": [],
 			"preRequestScript": null,
 			"pathVariables": {},
@@ -579,18 +184,19 @@
 			"data": [],
 			"dataMode": "raw",
 			"version": 2,
-			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"lessonId\", jsonData.id);\ntests[\"Successful POST request\"] = responseCode.code === 200;\n",
+			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1523629475589,
-			"name": "Add lesson",
+			"time": 1516885401774,
+			"name": "Create teacher",
 			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
 			"responses": [],
-			"rawModeData": "{\r\n\t\"name\": \"my lesson1\",\r\n\t\"description\": \"description\"\r\n}"
+			"rawModeData": "{\n\t\"name\" :\"Vlad Fernoaga Info\"\n}",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
 		},
 		{
-			"id": "d9f753d5-52c8-e4e2-30db-a3dbebffd52a",
+			"id": "3b882278-ca6e-3d5e-c16c-dbb75f835dc9",
 			"headers": "Content-Type: application/json\n",
 			"headerData": [
 				{
@@ -615,9 +221,622 @@
 			"time": 1516885524405,
 			"name": "Add question 3",
 			"description": "",
-			"collectionId": "fb5233d3-b6ad-d995-c38a-fb2ef8d1cd0c",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
 			"responses": [],
-			"rawModeData": "{\n\t\"question\" : \"What is the first city that reached over 5 million people first?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"London\", \"hint\": null},\n\t  \"2\": { \"value\": \"New York\", \"hint\": \"It’s true, New York is a big city, but you should think about the capital of an European country.\"},\n\t  \"3\": { \"value\": \"Beijing\", \"hint\": \"It’s  not an Asian country, your should look more to the West.\"},\n\t  \"4\": { \"value\": \"Mexico City\", \"hint\": \"It’s not an American country, look on the other side of the ocean.\"}\n\t},\n\t\"correctVariant\": 1\n}"
+			"rawModeData": "{\n\t\"question\" : \"What is the first city that reached over 5 million people first?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"London\", \"hint\": null},\n\t  \"2\": { \"value\": \"New York\", \"hint\": \"It’s true, New York is a big city, but you should think about the capital of an European country.\"},\n\t  \"3\": { \"value\": \"Beijing\", \"hint\": \"It’s  not an Asian country, your should look more to the West.\"},\n\t  \"4\": { \"value\": \"Mexico City\", \"hint\": \"It’s not an American country, look on the other side of the ocean.\"}\n\t},\n\t\"correctVariant\": 1\n}",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "3cb85e04-a766-8e58-dc5f-73a8c0f067d1",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/lesson/1/question",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1516885397225,
+			"name": "Add question 1",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\n\t\"question\" : \"What is the capital of Belgium?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"Venice\", \"hint\": \"It is true, this city is Europe. But is more to the North than Venice.\"},\n\t  \"2\": { \"value\": \"Beijing\", \"hint\": \"You better should think first about the continent.\"},\n\t  \"3\": { \"value\": \"Brusells\", \"hint\": null},\n\t  \"4\": { \"value\": \"London\", \"hint\": \"You are close, these cities are neighbors but the capital of Belgium is on the mainland.\"}\n\t},\n\t\"correctVariant\": 3\n\n\t\n}",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "42d462c3-5d32-9469-b4c5-d73fe9c3504c",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{jwtToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/session",
+			"folder": "12018b24-468d-555a-419b-3c72340951d6",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PATCH",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523626494471,
+			"name": "Stop lesson ",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "4809913c-c691-cae1-58ae-4390bb7d82b2",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{jwtToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/lesson/{{username}}",
+			"folder": "12018b24-468d-555a-419b-3c72340951d6",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523619125217,
+			"name": "Get lessons",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"name\": \"<the lesson name>\",\r\n\t\"description\": \"<the lesson description>\"\r\n}",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "4c18c2fc-8716-d727-4202-11709486e0d5",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/lesson/1/question",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1516885529309,
+			"name": "Add question 4",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\n\t\"question\" : \"Where was Napoleon Bonaparte born?\",\n\t\t\"variants\":{\n\t  \"1\": {\"value\": \"Brittany\", \"hint\": \"Think of a place that is not on the mainland.\"},\n\t  \"2\": { \"value\": \"Corsica\", \"hint\": null},\n\t  \"3\": { \"value\": \"Catalunia\", \"hint\": \"Come on, Napoleon was French!\"},\n\t  \"4\": { \"value\": \"Occitanie\", \"hint\": \"Think of a place that is not on the mainland.\"}\n\t},\n\t\"correctVariant\": 2\n}",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "55e369c0-1f28-64a3-95f8-b9bcc61ff93b",
+			"headers": "",
+			"headerData": [],
+			"url": "{{base_url}}/report/allquestions",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1516885544193,
+			"name": "All question report",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "60ec8069-4814-845c-7f6e-4534cc344ce8",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/lesson/1/session",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1516885407403,
+			"name": "Generate session",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "71e89a7c-1c9a-ee0f-1f80-3ed8e72c03c2",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{jwtToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/report/{{username}}/{{lessonId}}/{{sessionId}}/questionStats/7",
+			"folder": "f04c9e57-b3e9-547a-32c2-22d6b3e53835",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523710970053,
+			"name": "Question Stats report",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"name\": \"<the lesson name>\",\r\n\t\"description\": \"<the lesson description>\"\r\n}"
+		},
+		{
+			"id": "7370dd08-a540-e0d4-399f-dc0bd362e133",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{jwtToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/session",
+			"folder": "12018b24-468d-555a-419b-3c72340951d6",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"sessionId\", jsonData.sessionId);\ntests[\"Successful POST request\"] = responseCode.code === 201;\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523705637631,
+			"name": "Start lesson ",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "7537e2f7-d7d5-27d9-9f9f-b3dcf533f1a1",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{jwtToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/7/trigger/",
+			"folder": "f04c9e57-b3e9-547a-32c2-22d6b3e53835",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523706327219,
+			"name": "Trigger Question",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"name\": \"<the lesson name>\",\r\n\t\"description\": \"<the lesson description>\"\r\n}"
+		},
+		{
+			"id": "755c423f-db02-ea45-faa3-1475bf357f22",
+			"headers": "",
+			"headerData": [],
+			"url": "{{base_url}}/question/1_1_2018-01-25_777/1",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1516885677894,
+			"name": "TriggerQuestion",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "98ee3141-10e2-b5a7-83c1-38d5aab8a3ba",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{jwtToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/lesson/{{username}}/{{lessonId}}/question",
+			"folder": "12018b24-468d-555a-419b-3c72340951d6",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523706330021,
+			"name": "Add question to lesson",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"question\" : \"Question 1\",\r\n\t\"variants\":[\r\n\t\t\t{ \"value\": \"Variant1\", \"hint\": \"hint-text\"},\r\n\t\t\t{ \"value\": \"Variant2\", \"hint\": \"hint-text\"},\r\n\t\t\t{ \"value\": \"VariantCorrect\", \"hint\": null},\r\n\t\t\t{ \"value\": \"Variant4\", \"hint\": \"hint-text\"}\r\n\t\t]\r\n\t\r\n}\r\n"
+		},
+		{
+			"id": "b2341c80-21fc-f9b4-60f9-17c4a95649f4",
+			"headers": "",
+			"headerData": [],
+			"url": "{{base_url}}/report/overview",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1516885587613,
+			"name": "Get overview",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "b5dba5df-8c0c-90b6-2b4f-c9a60866cb9b",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/login/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"jwtToken\", jsonData.token);\npostman.setEnvironmentVariable(\"idUser\", jsonData.idUser);\npostman.setEnvironmentVariable(\"username\", jsonData.username);\ntests[\"Successful POST request\"] = responseCode.code === 200;\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523543825936,
+			"name": "teacher login",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"username\": \"testTeacher1\",\r\n\t\"password\": \"teacher1\"\r\n}",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"folder": "12018b24-468d-555a-419b-3c72340951d6"
+		},
+		{
+			"id": "b8ac2ddd-9cb3-1988-8326-bfc45b18c3c7",
+			"headers": "",
+			"headerData": [],
+			"url": "{{base_url}}/report/question/4",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1516885579685,
+			"name": "Get Question  realtime stats",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "c3621d7b-ccbd-821b-cefd-95f8ec1ac003",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{jwtToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/report/{{username}}/{{lessonId}}/{{sessionId}}/questionStats/{questionId}/info",
+			"folder": "f04c9e57-b3e9-547a-32c2-22d6b3e53835",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523708045895,
+			"name": "Question Stats report info",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"name\": \"<the lesson name>\",\r\n\t\"description\": \"<the lesson description>\"\r\n}"
+		},
+		{
+			"id": "cd2c9ecc-f976-8ad3-2f01-5140f5a11eb1",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{jwtToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/report/{{username}}/{{lessonId}}/{{sessionId}}/lessonReport",
+			"folder": "f04c9e57-b3e9-547a-32c2-22d6b3e53835",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523707827753,
+			"name": "Lesson Report",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"name\": \"<the lesson name>\",\r\n\t\"description\": \"<the lesson description>\"\r\n}"
+		},
+		{
+			"id": "d63870a0-5503-219b-14c0-4cb63b12e8b3",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/lesson/1/question",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1516885534230,
+			"name": "Add question 5",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\n\t\"question\" : \"Who where the founders of Intel company?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"Gordon Moore and Robert Noyce\", \"hint\": null},\n\t  \"2\": { \"value\": \"Bill Gates\", \"hint\": \"It is a hardware company. Bill Gates is the software guy.\"},\n\t  \"3\": { \"value\": \"Larry Page and Sergey Brin\", \"hint\": \"Intel is older than Larry and Sergey, the Google founders.\"},\n\t  \"4\": { \"value\": \"Wolfgang Porsche\" , \"hint\": \"It's a microprocessor company not a car company.\"}\n\t},\n\t\"correctVariant\": 1\n}",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "dbdd8fca-e90d-ab2f-ab5e-e43bf393bb2b",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer {{jwtToken}}\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer {{jwtToken}}",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/lesson/{{username}}/",
+			"folder": "12018b24-468d-555a-419b-3c72340951d6",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "var jsonData = JSON.parse(responseBody);\npostman.setEnvironmentVariable(\"lessonId\", jsonData.id);\ntests[\"Successful POST request\"] = responseCode.code === 200;\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1523629475589,
+			"name": "Add lesson",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\r\n\t\"name\": \"my lesson1\",\r\n\t\"description\": \"description\"\r\n}",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
+		},
+		{
+			"id": "dca04f0f-e63b-a4a2-7059-21b3f1bd6641",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{base_url}}/lesson/1/question",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1516885478638,
+			"name": "Add question 2",
+			"description": "",
+			"collectionId": "19333da9-cfeb-64c9-5ea0-8940550923fc",
+			"responses": [],
+			"rawModeData": "{\n\t\"question\" : \"When did the first world war started?\",\n\t\"variants\":{\n\t  \"1\": {\"value\": \"2011\", \"hint\": \"It was in the past century.\"},\n\t  \"2\": { \"value\": \"1847\", \"hint\": \"Not so much time in the past.\"},\n\t  \"3\": { \"value\": \"1914\", \"hint\": null},\n\t  \"4\": { \"value\": \"1935\", \"hint\": \"The question is about the first not the second World War.\"}\n\t},\n\t\"correctVariant\": 3\n}",
+			"collection_id": "19333da9-cfeb-64c9-5ea0-8940550923fc"
 		}
 	]
 }

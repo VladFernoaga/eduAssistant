@@ -10,5 +10,5 @@ import lombok.Setter;
 public class MultipleChoiceQuestion {
 	
 	private List<VariantValue> variants;
-	private String correctVriant;
+	private int correctVriantId;
 }

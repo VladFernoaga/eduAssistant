@@ -29,8 +29,8 @@ public class BeanConfig {
 	
 	@Bean
 	public JTelegramBot getTelegramBot() {
-		LOGGER.info("Initilizate the chatbot with name: "+BOOT_NAME_PROD);
-		JTelegramBot bot = new JTelegramBot(BOOT_NAME_PROD, API_TOKEN_PROD, updateHandler);
+		LOGGER.info("Initilizate the chatbot with name: "+BOOT_NAME_TEST);
+		JTelegramBot bot = new JTelegramBot(BOOT_NAME_TEST, API_TOKEN_TEST, updateHandler);
 		return bot;
 	}
 	

@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CallbackData {
 
-	private String value;
-	private Long id;
+	private int rId;
+	private long qId;
+	private long sId;
 }
