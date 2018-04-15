@@ -2,9 +2,11 @@ package ro.unitbv.eduassistant.service.impl;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,13 +23,12 @@ import ro.unitbv.eduassistant.model.Lesson;
 import ro.unitbv.eduassistant.model.Question;
 import ro.unitbv.eduassistant.model.Registration;
 import ro.unitbv.eduassistant.model.Response;
-import ro.unitbv.eduassistant.model.Student;
 import ro.unitbv.eduassistant.repo.LessonRepo;
 import ro.unitbv.eduassistant.repo.QuestionRepo;
 import ro.unitbv.eduassistant.repo.RegistrationRepo;
 import ro.unitbv.eduassistant.repo.ResponseDao;
-import ro.unitbv.eduassistant.repo.StudentRepo;
 import ro.unitbv.eduassistant.service.ReportService;
+import ro.unitbv.eduassistant.util.Counter;
 import ro.unitbv.eduassistant.util.Defaults;
 
 @Service
@@ -36,15 +37,13 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private LessonRepo lessonRepo;
 	@Autowired
-	private StudentRepo studRepo;
-	@Autowired
 	private QuestionRepo questRepo;
 	@Autowired
 	private ResponseDao responseDao;
-	
+
 	@Autowired
 	private RegistrationRepo registrationRepo;
-	
+
 	@Override
 	public AllLessonQuestionDto generateLessonReport(long lessonId, String sessionId) {
 		Lesson lesson = lessonRepo.findById(lessonId)
@@ -57,10 +56,10 @@ public class ReportServiceImpl implements ReportService {
 		int id = 1;
 		for (Question quest : lesson.getQuestions()) {
 			// TODO remove Id when the responses will be dynamic
-			if(id > 5){
+			if (id > 5) {
 				break;
 			}
-			
+
 			List<Response> correctResponses = responseDao
 					.findResponsesForQuestionIdAndSessionId(quest.getId(), sessionId).stream()
 					.filter(rsp -> rsp.getMultipleChoiceQuestion().isCorrect()).collect(Collectors.toList());
@@ -95,149 +94,141 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public QuestionStatsDto generateQuestionStats(long lessonId, long questionId, String sessionId) {
-		questRepo.findByIdAndLessonId(questionId,lessonId)
-				.orElseThrow(() -> new IllegalArgumentException(String.format("Unknown questionId: %s for the lesson %s", questionId,lessonId)));
-		
-		List<StudentQuestionStatDto> data = new ArrayList<>();
-		for(Registration registration : registrationRepo.getRegistrations(sessionId)){
-				List<Response> questionResponses = registration.getResponses().stream()
-						.filter(r -> r.getQuestion().getId().equals(questionId)).collect(Collectors.toList());
-				// Sort from the newest to the oldest response
-				questionResponses.sort((q1, q2) -> (int) (q2.getId() - q1.getId()));
-				
-				Optional<Response> lastResponse = Optional.empty();
-				if (!questionResponses.isEmpty()) {
-					lastResponse = Optional.of(questionResponses.get(0));
-				}
+		questRepo.findByIdAndLessonId(questionId, lessonId).orElseThrow(() -> new IllegalArgumentException(
+				String.format("Unknown questionId: %s for the lesson %s", questionId, lessonId)));
 
-				StudentQuestionStatDto studStatDto = new StudentQuestionStatDto();
-				studStatDto.setName(registration.getStudent().getName());
-				if (lastResponse.isPresent()) {
-					studStatDto.setStatus(lastResponse.get().getMultipleChoiceQuestion().isCorrect() ? Defaults.RESPONSE_STATUS_CORRECT : Defaults.RESPONSE_STATUS_WRONG);
-				} else {
-					studStatDto.setStatus(Defaults.RESPONSE_STATUS_PENDING);
-				}
-				data.add(studStatDto);
+		List<StudentQuestionStatDto> data = new ArrayList<>();
+		for (Registration registration : registrationRepo.getRegistrations(sessionId)) {
+			StudentQuestionStatDto studStatDto = new StudentQuestionStatDto();
+			studStatDto.setName(registration.getStudent().getName());
+
+			Optional<Response> lastResponse = getLastResponse(registration, questionId);
+			if (lastResponse.isPresent()) {
+				studStatDto.setStatus(lastResponse.get().getMultipleChoiceQuestion().isCorrect()
+						? Defaults.RESPONSE_STATUS_CORRECT : Defaults.RESPONSE_STATUS_WRONG);
+			} else {
+				studStatDto.setStatus(Defaults.RESPONSE_STATUS_PENDING);
+			}
+			data.add(studStatDto);
 		}
 		return new QuestionStatsDto(data);
 	}
 
 	@Override
 	public QuestionInfoDto generateQuestionStatsInfo(long questionId, long lessonId, String sessionId) {
-		Question question = questRepo.findById(questionId)
-				.orElseThrow(() -> new IllegalArgumentException(String.format("Unknown questionId: %s", questionId)));
+		Question question = questRepo.findByIdAndLessonId(questionId, lessonId)
+				.orElseThrow(() -> new IllegalArgumentException(
+						String.format("Unknown questionId: %s for the lesson %s", questionId, lessonId)));
 
-		int expectedAmountOfAnswers = 0;
-		int correctAmountOfAnswers = 0;
-		int wrongAmountOfAnswers = 0;
-		int pendingAmountOfAnswers = 0;
-		List<Student> students = studRepo.findAll();
-		for (Student stud : students) {
-			List<Registration> registrations = stud.getRegistrations();
-			if (registrations != null && !registrations.isEmpty()) {
-				expectedAmountOfAnswers++;
-				
-				List<Response> questionResponses = registrations.get(0).getResponses().stream()
-						.filter(r -> r.getQuestion().getId().equals(questionId)).collect(Collectors.toList());
-				Response finalResponse = null;
+		List<Registration> registrations = registrationRepo.getRegistrations(sessionId);
+		Counter correctAnswers = new Counter();
+		Counter wrongAnswers = new Counter();
+		Counter pendingAnswers = new Counter();
 
-				questionResponses.sort((q1, q2) -> (int) (q1.getId() - q2.getId()));
-				if (!questionResponses.isEmpty()) {
-					finalResponse = questionResponses.get(questionResponses.size() - 1);
-				}
-
-				if (finalResponse != null) {
-					if(finalResponse.getMultipleChoiceQuestion().isCorrect()) {
-						correctAmountOfAnswers++;
-					}else {
-						wrongAmountOfAnswers++;
-					}
+		registrations.stream().map((r) -> this.getLastResponse(r, questionId)).forEach(lastResponse -> {
+			if (lastResponse.isPresent()) {
+				if (lastResponse.get().getMultipleChoiceQuestion().isCorrect()) {
+					correctAnswers.increment();
 				} else {
-					pendingAmountOfAnswers++;
+					wrongAnswers.increment();
 				}
+			} else {
+				pendingAnswers.increment();
 			}
-		}
-		return new QuestionInfoDto(question.getQuestion(),expectedAmountOfAnswers,correctAmountOfAnswers,wrongAmountOfAnswers,pendingAmountOfAnswers);
+		});
+		return new QuestionInfoDto(question.getQuestion(), registrations.size(), correctAnswers.getIndex(),
+				wrongAnswers.getIndex(), pendingAnswers.getIndex());
 	}
 
 	@Override
 	public LessonOverviewDto generateLessonOverview(long lessonId, String sessionId) {
 
 		List<StudentLessonOverviewDto> data = new ArrayList<>();
+		for (Registration registration : registrationRepo.getRegistrations(sessionId)) {
 
-		List<Student> students = studRepo.findAll();
-		for (Student stud : students) {
-			List<Registration> registrations = stud.getRegistrations();
-			if (registrations != null && !registrations.isEmpty()) {
-
-				Map<Question, List<Response>> questionResponsesMap = new HashMap<>();
-				for (Response rsp : registrations.get(0).getResponses()) {
-					Question quest = rsp.getQuestion();
-					List<Response> questResps = questionResponsesMap.get(quest);
-					if (questResps == null) {
-						questResps = new ArrayList<>();
-					}
-					questResps.add(rsp);
-					questionResponsesMap.put(quest, questResps);
-				}
-
-				StudentLessonOverviewDto studOverviewStat = new StudentLessonOverviewDto();
-				studOverviewStat.setName(stud.getName());
-				int totalNrRespondedQuestions = 0;
-				int correctQuestions = 0;
-				for (Question quest : questionResponsesMap.keySet()) {
-
-					List<Response> questResps = questionResponsesMap.get(quest);
-					questResps.sort((q1, q2) -> (int) (q1.getId() - q2.getId()));
-					Response finalResponse = null;
-					if (!questResps.isEmpty()) {
-						finalResponse = questResps.get(questResps.size() - 1);
-					}
-
-					int rsp = 0;
-					if (finalResponse != null) {
-						rsp = finalResponse.getMultipleChoiceQuestion().isCorrect() ? 2 : 1;
-
-						totalNrRespondedQuestions++;
-						correctQuestions += finalResponse.getMultipleChoiceQuestion().isCorrect() ? 1 : 0;
-					}
-
-					switch (Integer.valueOf(quest.getId() + "")) {
-					case 1:
-						studOverviewStat.setQuestion1(rsp);
-						break;
-					case 2:
-						studOverviewStat.setQuestion2(rsp);
-						break;
-					case 3:
-						studOverviewStat.setQuestion3(rsp);
-						break;
-					case 4:
-						studOverviewStat.setQuestion4(rsp);
-						break;
-					case 5:
-						studOverviewStat.setQuestion5(rsp);
-						break;
-					default:
-						break;
-					}
-
-				}
-
-				// Calculate precente
-
-				if (totalNrRespondedQuestions == 5) {
-					double precent = ((double) correctQuestions) / 5;
-
-					studOverviewStat.setProcent(NumberFormat.getPercentInstance().format(precent));
+			Map<Question, List<Response>> questionResponsesMap = new HashMap<>();
+			for (Response response : registration.getResponses()) {
+				if (questionResponsesMap.get(response.getQuestion()) == null) {
+					questionResponsesMap.put(response.getQuestion(), Arrays.asList(response));
 				} else {
-					studOverviewStat.setProcent("");
+					questionResponsesMap.get(response.getQuestion()).add(response);
 				}
-				data.add(studOverviewStat);
-
 			}
+			data.add(this.getStudentLessonOverview(questionResponsesMap, registration.getStudent().getName()));
 		}
-
 		return new LessonOverviewDto(data);
 	}
+
+	private StudentLessonOverviewDto getStudentLessonOverview(	Map<Question, List<Response>> questionResponsesMap, String studentName){
+		
+		StudentLessonOverviewDto studOverviewStat = new StudentLessonOverviewDto();
+		studOverviewStat.setName(studentName);
+		
+		// TODO remove Id when the responses will be dynamic
+		int id = 1;
+
+		int respondedAnswers = 0;
+		int correctAnswers = 0;
+		for (Entry<Question, List<Response>> entry : questionResponsesMap.entrySet()) {
+			// TODO remove Id when the responses will be dynamic
+			if (id > 5) {
+				break;
+			}
+
+			Optional<Response> lastResponse = getLastResponse(entry.getValue());
+			int response = Defaults.NOT_ANSWERED;
+			if (lastResponse.isPresent()) {
+				response = lastResponse.get().getMultipleChoiceQuestion().isCorrect() ? Defaults.CORRECT_ANSWERE
+						: Defaults.WRONG_ANSWERE;
+				correctAnswers += response == Defaults.CORRECT_ANSWERE ? 1 : 0;
+				respondedAnswers++;
+			}
+
+			switch (id) {
+			case 1:
+				studOverviewStat.setQuestion1(response);
+				break;
+			case 2:
+				studOverviewStat.setQuestion2(response);
+				break;
+			case 3:
+				studOverviewStat.setQuestion3(response);
+				break;
+			case 4:
+				studOverviewStat.setQuestion4(response);
+				break;
+			case 5:
+				studOverviewStat.setQuestion5(response);
+				break;
+			default:
+				break;
+			}
+
+			// TODO remove Id when the responses will be dynamic
+			id++;
+		}
+
+		// Calculate precente
+
+		if (respondedAnswers == 5) {
+			double precent = ((double) correctAnswers) / 5;
+
+			studOverviewStat.setProcent(NumberFormat.getPercentInstance().format(precent));
+		} else {
+			studOverviewStat.setProcent("");
+		}
+		return studOverviewStat;
+	}
+	
+	private Optional<Response> getLastResponse(Registration registration, long questionId) {
+		List<Response> rsps = registration.getResponses().stream()
+				.filter(r -> r.getQuestion().getId().equals(questionId)).collect(Collectors.toList());
+		return getLastResponse(rsps);
+	}
+
+	private Optional<Response> getLastResponse(List<Response> responses) {
+		responses.sort((q1, q2) -> (int) (q2.getId() - q1.getId()));
+		return responses.isEmpty() ? Optional.empty() : Optional.of(responses.get(0));
+	}
+
 }

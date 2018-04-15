@@ -24,6 +24,7 @@ import ro.unitbv.eduassistant.repo.LessonRepo;
 import ro.unitbv.eduassistant.repo.QuestionRepo;
 import ro.unitbv.eduassistant.repo.TeacherRepo;
 import ro.unitbv.eduassistant.service.LessonService;
+import ro.unitbv.eduassistant.util.Counter;
 import ro.unitbv.eduassistant.util.DtoMapperService;
 
 @Service
@@ -70,7 +71,7 @@ public class LessonServiceImpl implements LessonService {
 
 		Counter counter= new Counter();
 		MultipleChoiceQuestion mcQuest = new MultipleChoiceQuestion();
-		mcQuest.setVariants(questionDto.getVariants().stream().map(v -> new VariantValue(counter.next(),v.getValue(), v.getHint()))
+		mcQuest.setVariants(questionDto.getVariants().stream().map(v -> new VariantValue(counter.increment(),v.getValue(), v.getHint()))
 				.collect(Collectors.toList()));
 		mcQuest.setCorrectVriantId(getCorrectVariantId(mcQuest.getVariants()));
 			question.setMultipeChoiceQuestion(mcQuest);
@@ -79,12 +80,8 @@ public class LessonServiceImpl implements LessonService {
 		return new QuestionAddResponse(question.getId(), question.getQuestion());
 	}
 
-	private class Counter{
-		int i =0;
-		int next(){
-			return i++;
-		}
-	}
+
+	
 	private int getCorrectVariantId(List<VariantValue> variants) {
 		List<VariantValue> correctVariants = variants.stream().filter(v -> v.getHint() == null)
 				.collect(Collectors.toList());
