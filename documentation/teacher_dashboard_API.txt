@@ -186,7 +186,84 @@ TRIGGER QUESTION:
 					"message": "The questionId with id <id> doesn't exist"
 				}
 		
+REPORTS:
+		Description: The lesson report
+		GET: /report/{teacherUsername}/{lessonId}/{sessionId}/lessonReport
+		HEADERS:
+			Content-Type: "application/json"
+			Authorization: "Bearer <jwtToken>"
+		BODY:
+			{	}
+		RESPONSE:
+			200:
+				{
+					"totalStudNr": 1,
+					"question1": 0,
+					"question2": 0,
+					"question3": 0,
+					"question4": 0,
+					"question5": 0
+				}
 
+		Description: Question statistic report
+		GET: /report/{teacherUsername}/{lessonId}/{sessionId}/questionStats/{questionId}
+		HEADERS:
+			Content-Type: "application/json"
+			Authorization: "Bearer <jwtToken>"
+		BODY:
+			{	}
+		RESPONSE:
+			200:
+				{
+					"data": [
+						{
+							"name": "Fernoaga",
+							"status": "correct"
+						}
+						]
+				}
+				
+		Description: Question statistic report info
+		GET: /report/{teacherUsername}/{lessonId}/{sessionId}/questionStats/{questionId}/info
+		HEADERS:
+			Content-Type: "application/json"
+			Authorization: "Bearer <jwtToken>"
+		BODY:
+			{	}
+		RESPONSE:
+			200:
+				{
+					"questionName": "Question 1",
+					"expectedAnswers": 1,
+					"correctAnswers": 1,
+					"wrongAnswers": 0,
+					"pendingAnswers": 0
+				}
+
+		Description: Lesson overview report
+		GET: /report/{teacherUsername}/{lessonId}/{sessionId}/lessonOverview
+		HEADERS:
+			Content-Type: "application/json"
+			Authorization: "Bearer <jwtToken>"
+		BODY:
+			{	}
+		RESPONSE:
+			200:
+				{
+				"data": [
+						{
+							"name": "Fernoaga",
+							"question1": 0,
+							"question2": 0,
+							"question3": 0,
+							"question4": 0,
+							"question5": 0,
+							"procent": ""
+						}
+					]
+				}			
+		
+		
 
 
 

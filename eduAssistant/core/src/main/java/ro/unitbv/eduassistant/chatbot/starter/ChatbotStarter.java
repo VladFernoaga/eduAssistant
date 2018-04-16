@@ -20,9 +20,6 @@ public class ChatbotStarter {
 	@Autowired
 	private JTelegramBot bot;
 	
-	@Autowired
-	PasswordEncoder pwdEncode;
-	
 	@Bean
 	public CommandLineRunner run() {
 		return (args) -> {
@@ -31,14 +28,4 @@ public class ChatbotStarter {
 		};
 	}
 	
-	@Bean("defaultpasswdGen")
-	public CommandLineRunner genDefaultPasswd() {
-		return (args) -> {
-			LOGGER.debug(() ->"Generate default passwords");
-			
-			LOGGER.debug(() -> "Password: teacher1 -> Encrypted: ["+pwdEncode.encode("teacher1")+"]");
-			LOGGER.debug(() -> "Password: teacher2 -> Encrypted: ["+pwdEncode.encode("teacher2")+"]");
-			LOGGER.debug(() -> "Password: teacher3 -> Encrypted: ["+pwdEncode.encode("teacher3")+"]");
-		};
-	}
 }

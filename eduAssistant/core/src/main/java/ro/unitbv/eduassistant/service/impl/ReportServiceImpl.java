@@ -149,7 +149,7 @@ public class ReportServiceImpl implements ReportService {
 			Map<Question, List<Response>> questionResponsesMap = new HashMap<>();
 			for (Response response : registration.getResponses()) {
 				if (questionResponsesMap.get(response.getQuestion()) == null) {
-					questionResponsesMap.put(response.getQuestion(), Arrays.asList(response));
+					questionResponsesMap.put(response.getQuestion(), new ArrayList<>(Arrays.asList(response)));
 				} else {
 					questionResponsesMap.get(response.getQuestion()).add(response);
 				}
