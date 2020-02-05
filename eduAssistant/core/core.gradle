@@ -17,6 +17,7 @@ mainClassName = "ro.unitbv.eduassistant.EduAssistantApplication"
 
 dependencies {
 
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.2.4.RELEASE'
 	//SPRING
 	compile('org.springframework.boot:spring-boot-starter-web:1.5.9.RELEASE', exludeDefaultLogger)
 	

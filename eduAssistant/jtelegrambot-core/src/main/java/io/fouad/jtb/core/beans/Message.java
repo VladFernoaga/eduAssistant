@@ -36,6 +36,12 @@ public class Message
 	/**
 	 * Unique message identifier.
 	 */
+	@JsonProperty("reply_markup")
+	private InlineKeyboardMarkup reply_markup;
+	
+	/**
+	 * Unique message identifier.
+	 */
 	@JsonProperty("message_id")
 	private int messageId;
 	
@@ -253,7 +259,7 @@ public class Message
 	
 	public Message(){}
 	
-	public Message(int messageId, User from, int date, Chat chat, User forwardFrom, Chat forwardFromChat,
+	public Message( int messageId, User from, int date, Chat chat, User forwardFrom, Chat forwardFromChat,
 	               Integer forwardDate, Message replyToMessage, int editDate, String text, MessageEntity[] entities,
 	               Audio audio, Document document, PhotoSize[] photo, Sticker sticker, Video video, Voice voice,
 	               String caption, Contact contact, Location location, Venue venue, User newChatMember,
@@ -295,6 +301,7 @@ public class Message
 		this.pinnedMessage = pinnedMessage;
 	}
 	
+	public InlineKeyboardMarkup getReply_markup() {return reply_markup;}
 	public int getMessageId(){return messageId;}
 	public User getFrom(){return from;}
 	public int getDate(){return date;}
