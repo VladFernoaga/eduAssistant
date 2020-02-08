@@ -1,13 +1,13 @@
-package ro.unitbv.eduassistant;
+package ro.unitbv.chatbot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EduAssistantApplication {
+public class ChatbotDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EduAssistantApplication.class, args);
+		SpringApplication.run(ChatbotDemoApplication.class, args);
 	}
 
 }

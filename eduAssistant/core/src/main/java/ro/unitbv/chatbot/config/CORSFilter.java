@@ -1,4 +1,4 @@
-package ro.unitbv.eduassistant.config;
+package ro.unitbv.chatbot.config;
 
 import java.io.IOException;
 

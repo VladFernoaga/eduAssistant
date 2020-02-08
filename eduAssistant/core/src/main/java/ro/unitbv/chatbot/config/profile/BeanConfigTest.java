@@ -1,4 +1,4 @@
-package ro.unitbv.eduassistant.config.profile;
+package ro.unitbv.chatbot.config.profile;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
