@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import io.fouad.jtb.core.JTelegramBot;
-import ro.unitbv.eduassistant.chatbot.handler.EduAssistantUpdateHandler;
+import ro.unitbv.chatbot.handler.ChatbotUpdateHandler;
 
 @Configuration
 @ComponentScan({"ro.unitbv.eduassistant, ro.unitbv.eduassistant.security.config"})
@@ -29,7 +29,7 @@ public class BeanConfig {
 	private String TELEGRAM_NAME;
 	
 	@Autowired
-	private EduAssistantUpdateHandler updateHandler;
+	private ChatbotUpdateHandler updateHandler;
 	@Autowired
 	PasswordEncoder pwdEncode;
 	

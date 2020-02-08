@@ -1,4 +1,4 @@
-package ro.unitbv.eduassistant.chatbot.starter;
+package ro.unitbv.charbot.starter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

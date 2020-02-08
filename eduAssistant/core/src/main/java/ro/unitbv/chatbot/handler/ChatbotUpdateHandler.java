@@ -1,4 +1,4 @@
-package ro.unitbv.eduassistant.chatbot.handler;
+package ro.unitbv.chatbot.handler;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -24,7 +24,7 @@ import ro.unitbv.eduassistant.service.RegistrationService;
 import ro.unitbv.eduassistant.service.impl.CallbackData;
 
 @Service
-public class EduAssistantUpdateHandler implements UpdateHandler {
+public class ChatbotUpdateHandler implements UpdateHandler {
 
 	/** The Constant LOGGER. */
 	public static final Logger LOGGER = LogManager.getLogger();
@@ -72,7 +72,7 @@ public class EduAssistantUpdateHandler implements UpdateHandler {
 
 	public void onInlineQueryReceived(TelegramBotApi bot, int id, InlineQuery inlineQuery) {
 	}
-
+	
 	public void onMessageReceived(TelegramBotApi bot, int id, Message message) {
 		String messageText = message.getText();
 		String textWords[] = messageText.split("\\s+");
